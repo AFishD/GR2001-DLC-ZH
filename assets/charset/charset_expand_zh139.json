@@ -1,0 +1,139 @@
+{
+ "note": "★ GR_ZH139 扩容清单 (13 个有证据的缺字)。生成器 work/builds/GR_EXPAND/tools/a2_gap.py + a3_plan.py; 逐槽 323 行明细见 docs/REPORT_EXPAND_2300.md 与 work/builds/GR_EXPAND/out/gap_plan.csv。 每个字占一个**零引用 PUA 占位槽** (码位/槽位不变, pair_of 只换键名)。",
+ "tool": "work/builds/GR_EXPAND/tools/a3_plan.py",
+ "base": "work/builds/GR_RELEASE/GR_ZH138.iso",
+ "base_sha256": "7396f55cd8d4d7ea5dd7806a355a25c8413c59a2bf1296547722e54bd541a2f2",
+ "charset_before_sha256": "28a1dd47cbd35669cbd7c3bdb3e5bd091062b1f6580b4bb62c1b67addf451c59",
+ "selected": [
+  {
+   "char": "兄",
+   "slot": 1981,
+   "pair": "B6A8",
+   "tier": "A",
+   "pc_count": 0,
+   "rich_count": 1,
+   "ink": 55,
+   "evidence": "REPORT_text_reduce #14 字库无 弟/兄/姐"
+  },
+  {
+   "char": "凉",
+   "slot": 1988,
+   "pair": "B6AF",
+   "tier": "A",
+   "pc_count": 0,
+   "rich_count": 0,
+   "ink": 61,
+   "evidence": "REPORT_text_reduce #13 字库无 凉/季"
+  },
+  {
+   "char": "啪",
+   "slot": 2013,
+   "pair": "B6C8",
+   "tier": "A",
+   "pc_count": 0,
+   "rich_count": 0,
+   "ink": 85,
+   "evidence": "REPORT_r71_scene_reduce #6 字库无 啪 (T0069 枪声)"
+  },
+  {
+   "char": "姐",
+   "slot": 2014,
+   "pair": "B6C9",
+   "tier": "A",
+   "pc_count": 0,
+   "rich_count": 0,
+   "ink": 76,
+   "evidence": "REPORT_text_reduce #14 字库无 弟/兄/姐"
+  },
+  {
+   "char": "孩",
+   "slot": 2015,
+   "pair": "B6CA",
+   "tier": "A",
+   "pc_count": 0,
+   "rich_count": 0,
+   "ink": 67,
+   "evidence": "REPORT_text_reduce #7 字库无 孩"
+  },
+  {
+   "char": "爹",
+   "slot": 2016,
+   "pair": "B6CB",
+   "tier": "A",
+   "pc_count": 0,
+   "rich_count": 0,
+   "ink": 65,
+   "evidence": "REPORT_text_reduce #1 字库无 父/爸/爹"
+  },
+  {
+   "char": "闺",
+   "slot": 2017,
+   "pair": "B6CC",
+   "tier": "A",
+   "pc_count": 0,
+   "rich_count": 0,
+   "ink": 77,
+   "evidence": "REPORT_text_reduce #7 字库无 闺"
+  },
+  {
+   "char": "勃",
+   "slot": 2018,
+   "pair": "B6CD",
+   "tier": "B",
+   "pc_count": 0,
+   "rich_count": 1,
+   "ink": 73,
+   "evidence": "译者丰富版草稿 (reduce_rules.py 原文片段): 鲍勃"
+  },
+  {
+   "char": "揽",
+   "slot": 2019,
+   "pair": "B6CE",
+   "tier": "B",
+   "pc_count": 0,
+   "rich_count": 1,
+   "ink": 80,
+   "evidence": "译者丰富版草稿 (reduce_rules.py 原文片段): 招揽"
+  },
+  {
+   "char": "暖",
+   "slot": 2020,
+   "pair": "B6CF",
+   "tier": "B",
+   "pc_count": 0,
+   "rich_count": 1,
+   "ink": 87,
+   "evidence": "译者丰富版草稿 (reduce_rules.py 原文片段): 暖意"
+  },
+  {
+   "char": "租",
+   "slot": 2021,
+   "pair": "B6D0",
+   "tier": "B",
+   "pc_count": 0,
+   "rich_count": 1,
+   "ink": 82,
+   "evidence": "译者丰富版草稿 (reduce_rules.py 原文片段): 出租"
+  },
+  {
+   "char": "讶",
+   "slot": 2022,
+   "pair": "B6D1",
+   "tier": "B",
+   "pc_count": 0,
+   "rich_count": 1,
+   "ink": 57,
+   "evidence": "译者丰富版草稿 (reduce_rules.py 原文片段): 惊讶"
+  },
+  {
+   "char": "醒",
+   "slot": 2023,
+   "pair": "B6D2",
+   "tier": "B",
+   "pc_count": 0,
+   "rich_count": 1,
+   "ink": 104,
+   "evidence": "译者丰富版草稿 (reduce_rules.py 原文片段): 唤醒"
+  }
+ ]
+}

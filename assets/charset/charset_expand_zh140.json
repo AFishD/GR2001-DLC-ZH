@@ -1,0 +1,36 @@
+{
+ "note": "★ GR_ZH140 补字清单 —— **丰富版译文 (work/log/Copy of M2爆破装药术语汉化, Gemini 会话归档) 里真正用到、但盘上字库没有的 9 个汉字**。每个字占一个零引用 PUA 占位槽 (码位/槽位不变, pair_of 只换键名), 紧接 GR_ZH139 用掉的 2023 号槽之后取 2024..2032。",
+ "tool": "tools/final_fix/patch_zh140_chars.py",
+ "base": "work/builds/GR_RELEASE/GR_ZH139.iso",
+ "base_sha256": "33b9acd9341f6e8f382e87545c4f75a0399eb4ba12f3bb02d4b58d3acb06bae5",
+ "charset_before_sha256": "23801c8fcb90232a0040559c358b3017543cf47a29a32fb978747bf38c517703",
+ "corpus": {
+  "json": "work/log/Copy of M2爆破装药术语汉化",
+  "entries_matched": 56,
+  "chars_scanned": 22751,
+  "distinct_chars": 1895,
+  "missing_cjk": 9,
+  "missing_other": {"×": 15, "…": 40},
+  "note_other": "× 与 … 是**标点** (非汉字), 本轮按 ASCII 等价写法 ×→x / ……→...... 落地 (与原盘英文 x 写法、现役盘既有 ...... 写法一致), 不占字库槽位"
+ },
+ "selected": [
+  {"char": "旨", "slot": 2024, "pair": "B6D3", "tier": "A", "ink": 65,
+   "doc": "SFXML:T0048 (步兵战斗徽章) 丰富版: 设立CIB旨在提振步兵士气"},
+  {"char": "盎", "slot": 2025, "pair": "B6D4", "tier": "A", "ink": 84,
+   "doc": "SFXML:T0068 (开发手记·第二辑) 丰富版: 趣味盎然"},
+  {"char": "秉", "slot": 2026, "pair": "B6D5", "tier": "A", "ink": 87,
+   "doc": "SFXML:T0069 (开发手记·第三辑) 丰富版: 秉持偷懒天性"},
+  {"char": "答", "slot": 2027, "pair": "B6D6", "tier": "A", "ink": 72,
+   "doc": "SFXML:T0068 (开发手记·第二辑) 丰富版: 要解答海量收尾问题"},
+  {"char": "艰", "slot": 2028, "pair": "B6D7", "tier": "A", "ink": 73,
+   "doc": "SFXML:T0063 (何为幽灵) 丰富版: 在局势最艰难时最后撤离"},
+  {"char": "芜", "slot": 2029, "pair": "B6D8", "tier": "A", "ink": 66,
+   "doc": "SFXML:T0069 (开发手记·第三辑) 丰富版: Beta达成，芜湖！"},
+  {"char": "酣", "slot": 2030, "pair": "B6D9", "tier": "A", "ink": 103,
+   "doc": "SFXML:T0063 (何为幽灵) 丰富版: 在激战正酣时由你掌控全局"},
+  {"char": "龃", "slot": 2031, "pair": "B6DA", "tier": "A", "ink": 89,
+   "doc": "SFXML:T0058 (琳迪·科恩) 丰富版: 长年的龃龉"},
+  {"char": "龉", "slot": 2032, "pair": "B6DB", "tier": "A", "ink": 93,
+   "doc": "SFXML:T0058 (琳迪·科恩) 丰富版: 长年的龃龉"}
+ ]
+}

@@ -1,0 +1,60 @@
+﻿# =====================================================================
+# 《幽灵行动：丛林风暴》PS2 (SLUS-20820) 汉化 —— 白名单式 .gitignore
+#
+# 进库的只有：tools/**  docs/**  assets/**  reference/**
+# 其余一律「本地自备」或「会话产物」：
+#     third_party/**  英文原盘 ISO、像素字体 TTF、模拟器（版权 + 体积）
+#     work/**         中间盘、dump、分析产物（几 GB）
+# =====================================================================
+
+# ---- 第一层：默认全部忽略，再逐项放行 ----
+*
+!*/
+!.gitignore
+!.gitattributes
+!README.md
+!tools/**
+!docs/**
+!assets/**
+!reference/**
+!third_party/readme.md
+
+# ---- 第二层：白名单里的排除项 ----
+__pycache__/
+*.pyc
+*.pyo
+*.iso
+*.img
+*.pss
+*.bin
+*.npy
+*.pkl
+*.ttf
+*.otf
+*.p2s
+*.dump
+*.log
+*.tmp
+*.part
+
+# ---- 第三层：第三方版权内容，永不入仓 ----
+third_party/**
+!third_party/readme.md
+
+# ---- 第四层：会话产物 / 构建产物 ----
+work/**
+_scratch/
+docs/_scratch/
+# ---- 第五层：外部参考会话（用户提供，体积大：125MB jsonl + media，永不入仓）----
+reference/dsh-session-session-*/
+reference/**/*.zip
+
+# ---- 模拟器调试桥（PCSX2-MCP 预编译包 / Node 运行时，体积大，不入仓）----
+tools/emu/pcsx2-mcp*/
+tools/emu/node*/
+tools/emu/*.zip
+# 模拟器记忆卡（测试产物，不入库）
+reference/Mcd001.ps2
+reference/Mcd001.ps2.stuck
+Mcd001.ps2
+Mcd001.ps2.stuck

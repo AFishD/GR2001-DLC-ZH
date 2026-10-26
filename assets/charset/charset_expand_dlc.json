@@ -1,0 +1,704 @@
+{
+ "schema": "grjs-font-expand/1",
+ "tool": "tools/font/expand_charset.py",
+ "tool_version": "r1.0",
+ "generated": "2026-10-21 18:15:10",
+ "sources": {
+  "seed_container_sha256": "cf4fbbd8d3e6666ae0eef66b8f3a37655d51f97a3095976eacff842b97f5585c",
+  "charset": "assets/charset/charset_compiled_zh16.json",
+  "charset_sha256": "0fe7019ad3258a8120fbb2b62fc58d10b760e3ee1eeb03a2e69673eab186cdd5",
+  "missing": "work/translation/merged/missing_chars.json",
+  "corpus": "work/translation/merged/translations_all.csv"
+ },
+ "capacity": {
+  "safe": 298,
+  "used": 45,
+  "remaining": 253,
+  "sentinel_forbidden": 50,
+  "col63": 36,
+  "note": "安全容量 = 零引用 PUA 槽（trail 0xB1/0xB5 哨兵槽禁止使用）"
+ },
+ "totals": {
+  "pairs_before": 2300,
+  "pairs_after": 2300,
+  "real_chars_after": 2011,
+  "pua_keys_after": 289
+ },
+ "assignments": [
+  {
+   "char": "订",
+   "slot": 2036,
+   "b1": 182,
+   "b2": 223,
+   "hex": "B6DF",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    832,
+    531
+   ],
+   "xor": 0,
+   "ink": 40
+  },
+  {
+   "char": "港",
+   "slot": 2037,
+   "b1": 182,
+   "b2": 224,
+   "hex": "B6E0",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    848,
+    531
+   ],
+   "xor": 0,
+   "ink": 79
+  },
+  {
+   "char": "税",
+   "slot": 2038,
+   "b1": 182,
+   "b2": 225,
+   "hex": "B6E1",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    864,
+    531
+   ],
+   "xor": 0,
+   "ink": 78
+  },
+  {
+   "char": "邀",
+   "slot": 2039,
+   "b1": 182,
+   "b2": 226,
+   "hex": "B6E2",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    880,
+    531
+   ],
+   "xor": 0,
+   "ink": 90
+  },
+  {
+   "char": "赔",
+   "slot": 2040,
+   "b1": 182,
+   "b2": 227,
+   "hex": "B6E3",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    896,
+    531
+   ],
+   "xor": 0,
+   "ink": 83
+  },
+  {
+   "char": "钥",
+   "slot": 2041,
+   "b1": 182,
+   "b2": 228,
+   "hex": "B6E4",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    912,
+    531
+   ],
+   "xor": 0,
+   "ink": 72
+  },
+  {
+   "char": "偿",
+   "slot": 2042,
+   "b1": 182,
+   "b2": 229,
+   "hex": "B6E5",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    928,
+    531
+   ],
+   "xor": 0,
+   "ink": 72
+  },
+  {
+   "char": "睛",
+   "slot": 2043,
+   "b1": 182,
+   "b2": 230,
+   "hex": "B6E6",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    944,
+    531
+   ],
+   "xor": 0,
+   "ink": 93
+  },
+  {
+   "char": "瑞",
+   "slot": 2044,
+   "b1": 182,
+   "b2": 231,
+   "hex": "B6E7",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    960,
+    531
+   ],
+   "xor": 0,
+   "ink": 87
+  },
+  {
+   "char": "厅",
+   "slot": 2045,
+   "b1": 182,
+   "b2": 232,
+   "hex": "B6E8",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    976,
+    531
+   ],
+   "xor": 0,
+   "ink": 49
+  },
+  {
+   "char": "译",
+   "slot": 2046,
+   "b1": 182,
+   "b2": 233,
+   "hex": "B6E9",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    992,
+    531
+   ],
+   "xor": 0,
+   "ink": 62
+  },
+  {
+   "char": "丛",
+   "slot": 2048,
+   "b1": 182,
+   "b2": 235,
+   "hex": "B6EB",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    0,
+    547
+   ],
+   "xor": 0,
+   "ink": 50
+  },
+  {
+   "char": "碧",
+   "slot": 2049,
+   "b1": 182,
+   "b2": 236,
+   "hex": "B6EC",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    16,
+    547
+   ],
+   "xor": 0,
+   "ink": 87
+  },
+  {
+   "char": "骑",
+   "slot": 2050,
+   "b1": 182,
+   "b2": 237,
+   "hex": "B6ED",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    32,
+    547
+   ],
+   "xor": 0,
+   "ink": 82
+  },
+  {
+   "char": "洋",
+   "slot": 2051,
+   "b1": 182,
+   "b2": 238,
+   "hex": "B6EE",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    48,
+    547
+   ],
+   "xor": 0,
+   "ink": 57
+  },
+  {
+   "char": "锤",
+   "slot": 2052,
+   "b1": 182,
+   "b2": 239,
+   "hex": "B6EF",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    64,
+    547
+   ],
+   "xor": 0,
+   "ink": 88
+  },
+  {
+   "char": "枢",
+   "slot": 2053,
+   "b1": 182,
+   "b2": 240,
+   "hex": "B6F0",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    80,
+    547
+   ],
+   "xor": 0,
+   "ink": 74
+  },
+  {
+   "char": "岔",
+   "slot": 2054,
+   "b1": 182,
+   "b2": 241,
+   "hex": "B6F1",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    96,
+    547
+   ],
+   "xor": 0,
+   "ink": 54
+  },
+  {
+   "char": "橡",
+   "slot": 2055,
+   "b1": 182,
+   "b2": 242,
+   "hex": "B6F2",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    112,
+    547
+   ],
+   "xor": 0,
+   "ink": 87
+  },
+  {
+   "char": "蜘",
+   "slot": 2056,
+   "b1": 182,
+   "b2": 243,
+   "hex": "B6F3",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    128,
+    547
+   ],
+   "xor": 0,
+   "ink": 91
+  },
+  {
+   "char": "蛛",
+   "slot": 2057,
+   "b1": 182,
+   "b2": 244,
+   "hex": "B6F4",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    144,
+    547
+   ],
+   "xor": 0,
+   "ink": 84
+  },
+  {
+   "char": "辅",
+   "slot": 2058,
+   "b1": 182,
+   "b2": 245,
+   "hex": "B6F5",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    160,
+    547
+   ],
+   "xor": 0,
+   "ink": 94
+  },
+  {
+   "char": "裁",
+   "slot": 2059,
+   "b1": 182,
+   "b2": 246,
+   "hex": "B6F6",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    176,
+    547
+   ],
+   "xor": 0,
+   "ink": 83
+  },
+  {
+   "char": "瓜",
+   "slot": 2060,
+   "b1": 182,
+   "b2": 247,
+   "hex": "B6F7",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    192,
+    547
+   ],
+   "xor": 0,
+   "ink": 56
+  },
+  {
+   "char": "谁",
+   "slot": 2061,
+   "b1": 182,
+   "b2": 248,
+   "hex": "B6F8",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    208,
+    547
+   ],
+   "xor": 0,
+   "ink": 74
+  },
+  {
+   "char": "伐",
+   "slot": 2062,
+   "b1": 182,
+   "b2": 249,
+   "hex": "B6F9",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    224,
+    547
+   ],
+   "xor": 0,
+   "ink": 61
+  },
+  {
+   "char": "葡",
+   "slot": 2063,
+   "b1": 182,
+   "b2": 250,
+   "hex": "B6FA",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    240,
+    547
+   ],
+   "xor": 0,
+   "ink": 104
+  },
+  {
+   "char": "萄",
+   "slot": 2064,
+   "b1": 182,
+   "b2": 251,
+   "hex": "B6FB",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    256,
+    547
+   ],
+   "xor": 0,
+   "ink": 87
+  },
+  {
+   "char": "芬",
+   "slot": 2065,
+   "b1": 182,
+   "b2": 252,
+   "hex": "B6FC",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    272,
+    547
+   ],
+   "xor": 0,
+   "ink": 55
+  },
+  {
+   "char": "滴",
+   "slot": 2066,
+   "b1": 182,
+   "b2": 253,
+   "hex": "B6FD",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    288,
+    547
+   ],
+   "xor": 0,
+   "ink": 82
+  },
+  {
+   "char": "亥",
+   "slot": 2067,
+   "b1": 182,
+   "b2": 254,
+   "hex": "B6FE",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    304,
+    547
+   ],
+   "xor": 0,
+   "ink": 51
+  },
+  {
+   "char": "弗",
+   "slot": 2068,
+   "b1": 183,
+   "b2": 161,
+   "hex": "B7A1",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    320,
+    547
+   ],
+   "xor": 0,
+   "ink": 70
+  },
+  {
+   "char": "汗",
+   "slot": 2069,
+   "b1": 183,
+   "b2": 162,
+   "hex": "B7A2",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    336,
+    547
+   ],
+   "xor": 0,
+   "ink": 47
+  },
+  {
+   "char": "裹",
+   "slot": 2070,
+   "b1": 183,
+   "b2": 163,
+   "hex": "B7A3",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    352,
+    547
+   ],
+   "xor": 0,
+   "ink": 93
+  },
+  {
+   "char": "栈",
+   "slot": 2071,
+   "b1": 183,
+   "b2": 164,
+   "hex": "B7A4",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    368,
+    547
+   ],
+   "xor": 0,
+   "ink": 70
+  },
+  {
+   "char": "猜",
+   "slot": 2072,
+   "b1": 183,
+   "b2": 165,
+   "hex": "B7A5",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    384,
+    547
+   ],
+   "xor": 0,
+   "ink": 86
+  },
+  {
+   "char": "肃",
+   "slot": 2073,
+   "b1": 183,
+   "b2": 166,
+   "hex": "B7A6",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    400,
+    547
+   ],
+   "xor": 0,
+   "ink": 76
+  },
+  {
+   "char": "惕",
+   "slot": 2074,
+   "b1": 183,
+   "b2": 167,
+   "hex": "B7A7",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    416,
+    547
+   ],
+   "xor": 0,
+   "ink": 79
+  },
+  {
+   "char": "盯",
+   "slot": 2075,
+   "b1": 183,
+   "b2": 168,
+   "hex": "B7A8",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    432,
+    547
+   ],
+   "xor": 0,
+   "ink": 55
+  },
+  {
+   "char": "侥",
+   "slot": 2076,
+   "b1": 183,
+   "b2": 169,
+   "hex": "B7A9",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    448,
+    547
+   ],
+   "xor": 0,
+   "ink": 68
+  },
+  {
+   "char": "匿",
+   "slot": 2077,
+   "b1": 183,
+   "b2": 170,
+   "hex": "B7AA",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    464,
+    547
+   ],
+   "xor": 0,
+   "ink": 94
+  },
+  {
+   "char": "蟒",
+   "slot": 2078,
+   "b1": 183,
+   "b2": 171,
+   "hex": "B7AB",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    480,
+    547
+   ],
+   "xor": 0,
+   "ink": 93
+  },
+  {
+   "char": "熔",
+   "slot": 2079,
+   "b1": 183,
+   "b2": 172,
+   "hex": "B7AC",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    496,
+    547
+   ],
+   "xor": 0,
+   "ink": 71
+  },
+  {
+   "char": "炉",
+   "slot": 2080,
+   "b1": 183,
+   "b2": 173,
+   "hex": "B7AD",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    512,
+    547
+   ],
+   "xor": 0,
+   "ink": 56
+  },
+  {
+   "char": "佛",
+   "slot": 2081,
+   "b1": 183,
+   "b2": 174,
+   "hex": "B7AE",
+   "slot_type": "pua_recycled",
+   "old_pua": "",
+   "cell": [
+    528,
+    547
+   ],
+   "xor": 0,
+   "ink": 84
+  }
+ ]
+}

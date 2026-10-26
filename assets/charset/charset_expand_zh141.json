@@ -1,0 +1,20 @@
+{
+ "note": "★ GR_ZH141 补字清单 —— 把 GR_ZH140 里**被迫降级成 ASCII 的真字形**补回: 省略号 U+2026 … (ZH140 写成 ......)、乘号 U+00D7 × (ZH140 写成 x), 外加 P2 标题《恐惧的总和》要用的 惧。每个字占一个零引用 PUA 占位槽 (码位/槽位不变, pair_of 只换键名), 紧接 GR_ZH140 用掉的 2032 号槽之后取 2033..2035。",
+ "tool": "tools/final_fix/patch_zh141_chars.py",
+ "base": "work/builds/GR_RELEASE/GR_ZH140.iso",
+ "base_sha256": "83757ff1d1bf87abd3c2c3059e25a2384c5a0497edb8fe0cbba44622b7fe247d",
+ "charset_before_sha256": "8164b91a6d36866c2c44156038526fb30075798ed7f553eab5c6849479d71030",
+ "corpus": {
+  "source": "ZH140 盘上的 ASCII 等价写法: 15 处 7.62x51 等口径 + 20 处 ......",
+  "entries": 39,
+  "note": "× 只替换「数字 x 数字」的口径写法 (15 处), 不动 Soundelux 这类英文词里的字母 x; ...... → …… 是 6 个 ASCII 点 → 2 个全角省略号 (-16 px/处)"
+ },
+ "selected": [
+  {"char": "…", "slot": 2033, "pair": "B6DC", "tier": "A", "ink": 12,
+   "doc": "U+2026 HORIZONTAL ELLIPSIS —— ZH140 里 20 处 ...... 的真字形 (T0068/T0069)"},
+  {"char": "×", "slot": 2034, "pair": "B6DD", "tier": "A", "ink": 17,
+   "doc": "U+00D7 MULTIPLICATION SIGN —— ZH140 里 15 处口径 7.62x51 / 5.56x45 / 9x19 … 的真字形"},
+  {"char": "惧", "slot": 2035, "pair": "B6DE", "tier": "A", "ink": 79,
+   "doc": "U+60E7 —— P2 标题 A0113《The Sum of All Fears》= 恐惧的总和"}
+ ]
+}

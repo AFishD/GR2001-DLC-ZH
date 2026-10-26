@@ -1,0 +1,895 @@
+{
+ "schema": "gr-ps2-zh-final-fix/1",
+ "generated": "2026-10-19 (GR_ZH133 merged)",
+ "project": "《幽灵行动》PS2 版 (SLUS-206.13 / SLUS_206.13) 汉化 —— 2400 产品线正式交付",
+ "product_tag": "GR_ZH133_ELF_stage",
+ "product_tag_note": "2026-10-19 合并轮: ELF 防线最优组合 = F4 + OOMFIX + F7 + F7b + G2 + G1b(精确 free 守卫) + F8(memset 野写守卫 a/b)。G1 (coarse free 守卫) **不入表**: 与 G1b 同 cave/同站点, 二者互斥; G1b 惰性更好且止野指针能力等价 (docs/REPORT_G1B.md)。 基底 = GR_REBUILD2400.iso (英文原盘 ⊕ K2 转储)。 本表只负责 ELF 层; 文本/图集层由 patch_zh130_glyph_edge.py + patch_zh133_stale_hashr.py 依次施加 ⇒ 最终成品 GR_ZH133.iso。",
+ "mandatory_rule": {
+  "rule": "今后一切构筑**必须从英文原版 ISO 出发**；禁止以上一版汉化 ISO 为基底。",
+  "eng_iso": "third_party\\orig\\ps2\\Tom Clancy's Ghost Recon (USA).iso",
+  "eng_iso_sha256": "2b42ea7ce9bd0a85972a07ca59b1b9d79422ed318b85737db3cfd17daa788531",
+  "why": "保证可复现: 基底是外部只读原盘 + 两块 cdvd 转储的函数, 而不是历史产物链上的某一环。",
+  "enforcer": "tools\\final_fix\\rebuild_base.py (基底) + tools\\final_fix\\repro_from_eng.ps1 (端到端)",
+  "note": "GR_REBUILD2400.iso 降级为**开发期快捷基底** (README.md §4 路径 A); 它本身也可由本规则重建。"
+ },
+ "single_source_of_truth": {
+  "patch_tool": "tools/final_fix/apply_fix.py",
+  "spec": "tools/final_fix/fix_spec_merged.json",
+  "repro_from_eng": "tools/final_fix/repro_from_eng_merged.ps1",
+  "base_builder": "tools/final_fix/rebuild_base.py",
+  "repro_short": "powershell -NoProfile -ExecutionPolicy Bypass -File tools\\final_fix\\repro_from_eng_merged.ps1",
+  "note": "本表由 tools/final_fix/make_spec_merged.py 生成 (合并 3 份既有补丁表); 身份字段 (sha256/md5/crc/diff) 由 --stage-iso 从实测盘烧入。"
+ },
+ "iso_layout": {
+  "elf_name": "SLUS_206.13",
+  "elf_lba": 295,
+  "sector": 2048,
+  "iso_of_va": "0x6C780",
+  "elf_off_formula": "elf_off = VA - 0x6C780 - 295*2048",
+  "note": "iso_off = VA - 0x6C780（ISO 内绝对偏移）"
+ },
+ "base_chain": [
+  {
+   "step": 0,
+   "role": "英文原盘（只读输入，仓库外不入库）",
+   "path": "third_party\\orig\\ps2\\Tom Clancy's Ghost Recon (USA).iso",
+   "sha256": "2b42ea7ce9bd0a85972a07ca59b1b9d79422ed318b85737db3cfd17daa788531",
+   "bytes": 1648164864,
+   "verified_on_disk": true
+  },
+  {
+   "step": 1,
+   "role": "2400 产品线重建盘（几何 h=644 / 64 列 / SKIP=2 / Y0=3 / GATE 0xBA / 字库 2350 槽 / 文本已迁移）",
+   "path": "work\\builds\\GR_REBUILD\\GR_REBUILD2400.iso",
+   "sha256": "d7f83d7ec4a8fe1ec8d60de4b17b94513bd1540dc929d3b667086f4910443ca0",
+   "elf_sha256": "5cb59175d28bfea3f37a9eb485399ea3925a2ca6f73d32d65e226d274abf47d8",
+   "bytes": 1648164864,
+   "builder": "tools\\final_fix\\rebuild_base.py --out <任意输出>   (★ 强制规则: 从英文原盘起; 旧脚本 work\\builds\\GR_REBUILD\\tools\\rb_build.py 已退役 —— 它依赖已被删除的 work\\builds\\GR_CSFIX\\temp\\K2_SLUS_206.13.elf)",
+   "builder_external_inputs": [
+    {
+     "path": "%LOCALAPPDATA%\\PCSX2\\cdvd-dump\\GR_FA2400_K2 (2026-10-17 15-08-20).dump",
+     "bytes": 74286520,
+     "bytes_note": "2026-10-18 实测值。旧文档写的 74,227,399 是**错误的字节数**(sha256 与实测文件一致, 只有 bytes 记错) ⇒ 已订正。",
+     "sha256": "11f371f294e4f8e353c21931a9c38d73c1309832a21e74cfb3e31d7095daadd9",
+     "why": "K2 盘 4.5% 扇区转储（ELF/图集/FONT.RES/中文文本表/SF XML 全链 100% 覆盖）；★ K2 真 ELF 由本转储 LBA 295 起 18,288 扇区现取（sha256 5cb59175…），不再需要任何中间文件"
+    },
+    {
+     "path": "%LOCALAPPDATA%\\PCSX2\\cdvd-dump\\GR_ZH113b (2026-10-15 19-39-44).dump",
+     "bytes": 77748244,
+     "bytes_note": "2026-10-18 实测值（旧文档写的 77,701,019 是错误字节数; sha256 一致）⇒ 已订正。",
+     "sha256": "57c9e9d147106c7c7dbc5e41b6a80ffa6ce7ea984ec21b33505fb765b40dbf74",
+     "why": "GR#3451 COMMON.PAK 旁证候选（GR 侧死拷贝）"
+    }
+   ],
+   "note": "rebuild_base.py 只用 tools/text_csv/tcslib.py（在库内；它再引 tools/hanliu/tools 的 lzo1x）—— **不再依赖 work/tools/zx_lib.py**（work/** 不入库, 只在开发机上有）；--out 目标必须不存在（防覆盖）。实测: 4.4 秒出基底, sha256 与声明值一致。"
+  },
+  {
+   "step": 2,
+   "role": "修复盘 = 基底 + **四件套**（F4 + OOMFIX + F7 + F7b；F7b 为 2026-10-18 F7B 轮新增）",
+   "path": "work\\builds\\GR_F7B\\F7B_prod_full.iso",
+   "sha256": "7d4e32972a8616622b415bbbdf654ec5d2e09c2bba7adce40e9c66d99736936d",
+   "bytes": 1648164864,
+   "builder": "tools\\final_fix\\apply_fix.py --base <step1> --out <任意输出>"
+  },
+  {
+   "step": 3,
+   "role": "交付成品（= step 2 逐字节相同；2026-10-18 1 帧粒度判定轮出的**零视觉差异路线**：四件套 + G2，不含 G1）",
+   "path": "work\\builds\\GR_RELEASE\\GR_ZH129.iso",
+   "sha256": "da8994d5c39ecbe5dfd52f191c8569117f22c8e32096fb4d73a5a13775a9588a",
+   "bytes": 1648164864,
+   "note": "内容源 = work\\builds\\GR_PRODCRASH\\GR_ZH128_cand3.iso（da8994d5c39ecbe5dfd52f191c8569117f22c8e32096fb4d73a5a13775a9588a）；本盘与它逐字节相同。上一版成品 GR_ZH128.iso（16c598fd…）含 G1，1 帧粒度下带 4 帧过渡差异 (f566/567、f1221/1222) ⇒ 保留为「最大保护」路线，见 GR_ZH128.note.md。"
+  }
+ ],
+ "product_identity": {
+  "tag": "GR_ZH133_ELF_stage",
+  "bytes": 1648164864,
+  "sha256": "e65e77fbb696ec5dd9dfaf5b6ca5bbc62d26bfa00e1f5c238fa150c4868791a1",
+  "md5": "7a135dfb5bbe279a44c3ecfaae907d17",
+  "elf": {
+   "bytes": 37453732,
+   "sha256": "a0c8499cf30f1cc5c44dfb49502270ed0ecbdccb30c023246b227591c40ba12e",
+   "crc32_xor": "653FBF69",
+   "lba": 295
+  },
+  "diff_vs_base": {
+   "bytes": 239,
+   "runs": 70
+  },
+  "note": "实测烧入 (--stage-iso GR_ZH133_stage.iso)"
+ },
+ "patches": [
+  {
+   "name": "F4",
+   "why": "malloc 大块桶链扫描：链头落在 RAM 之外时不再原地无限自旋，改走既有的「本桶无可用块」出口",
+   "va": "0x00102588",
+   "iso_off": "0x00095E08",
+   "elf_off": "0x0002608",
+   "old_word": "0x1459FFD1",
+   "old_dis": "bne $v0,$t9,-47",
+   "new_word": "0x081068D7",
+   "new_dis": "j 0x0041A35C",
+   "delay_slot": {
+    "va": "0x0010258C",
+    "word": "0x00000000",
+    "changed": false
+   },
+   "exits": "合法 j 0x001024D0（回原循环体）/ 不合法 j 0x00102590（本桶无可用块出口）",
+   "cave": {
+    "va": "0x0041A35C",
+    "iso_off": "0x003ADBDC",
+    "elf_off": "0x031A3DC",
+    "bytes": 36,
+    "words": [
+     "0x0322082B",
+     "0x004D582B",
+     "0x002B0824",
+     "0x10200002",
+     "0x00000000",
+     "0x08040934",
+     "0x00000000",
+     "0x08040964",
+     "0x00000000"
+    ],
+    "dis": [
+     "0x0041A35C  0322082B  sltu $at, $t9, $v0      ; at = (v0 > 桶哨兵 t9)",
+     "0x0041A360  004D582B  sltu $t3, $v0, $t5      ; t3 = (v0 < 0x1FFFFFFE)，t5 由 malloc 在 0x1024BC 设定",
+     "0x0041A364  002B0824  and $at, $at, $t3       ; at != 0 ⇔ 链头看起来是 RAM 内的块",
+     "0x0041A368  10200002  beq $at, $zero, +2 -> 0x0041A374",
+     "0x0041A36C  00000000  nop",
+     "0x0041A370  08040934  j 0x001024D0            ; 合法：回原循环体",
+     "0x0041A374  00000000  nop",
+     "0x0041A378  08040964  j 0x00102590            ; 不合法：走既有出口",
+     "0x0041A37C  00000000  nop"
+    ]
+   },
+   "provenance": "work/builds/GR_SPINFIX/tools/spinfix_apply.py 的 CAVE_F4（逐字相同）；GR_COMBFIX/tools/combfix_apply.py 原样继承"
+  },
+  {
+   "name": "OOMFIX",
+   "why": "解压器里 malloc 返回 NULL 时不再写 NULL+4（会踩 0 页），改走失败分支并把 s0 置 0 复用调用者的失败处理",
+   "va": "0x00539174",
+   "iso_off": "0x004CC9F4",
+   "elf_off": "0x04391F4",
+   "old_word": "0xAE620004",
+   "old_dis": "sw $v0,4($s3)",
+   "new_word": "0x08154012",
+   "new_dis": "j 0x00550048",
+   "delay_slot": {
+    "va": "0x00539178",
+    "word": "0xAE620008",
+    "changed": false
+   },
+   "exits": "成功 j 0x0053917C（延迟槽 0x539178 原指令照跑）/ 失败 j 0x005392A0（s0=0，走既有尾声）",
+   "cave": {
+    "va": "0x00550048",
+    "iso_off": "0x004E38C8",
+    "elf_off": "0x04500C8",
+    "bytes": 44,
+    "words": [
+     "0x10400005",
+     "0x00000000",
+     "0xAE620004",
+     "0xAE620008",
+     "0x0814E45F",
+     "0x00000000",
+     "0xAE600004",
+     "0xAE600008",
+     "0x0000802D",
+     "0x0814E4A8",
+     "0x00000000"
+    ],
+    "dis": [
+     "0x00550048  10400005  beq $v0, $zero, +5 -> 0x00550060   ; malloc 返回 0 ?",
+     "0x0055004C  00000000  nop",
+     "0x00550050  AE620004  sw $v0, 4($s3)          ; 成功：输出缓冲基址",
+     "0x00550054  AE620008  sw $v0, 8($s3)          ; 成功：输出游标",
+     "0x00550058  0814E45F  j 0x0053917C            ; 回原流程",
+     "0x0055005C  00000000  nop",
+     "0x00550060  AE600004  sw $zero, 4($s3)        ; .fail：基址 = 0",
+     "0x00550064  AE600008  sw $zero, 8($s3)        ; .fail：游标 = 0",
+     "0x00550068  0000802D  daddu $s0, $zero, $zero ; ★ s0 = 0 ⇒ 返回 0",
+     "0x0055006C  0814E4A8  j 0x005392A0            ; 走既有尾声",
+     "0x00550070  00000000  nop"
+    ]
+   },
+   "provenance": "work/builds/GR_OOMFIX/tools/oomfix_apply.py 原样（含 s0 置 0）"
+  },
+  {
+   "name": "F7",
+   "why": "分配器 own-bin 回边（0x1021D4）最小修复：链头非法就 bail 到既有的「换下一个桶」出口，截断自旋",
+   "va": "0x001021D4",
+   "iso_off": "0x00095A54",
+   "elf_off": "0x0002254",
+   "old_word": "0x1447FFEA",
+   "old_dis": "bne $v0,$a3,-22",
+   "new_word": "0x08177B31",
+   "new_dis": "j 0x005DECC4",
+   "delay_slot": {
+    "va": "0x001021D8",
+    "word": "0x00000000",
+    "changed": false
+   },
+   "exits": "合法 j 0x00102180（回本桶扫描循环体）/ 不合法 j 0x001021E0（换下一个桶）",
+   "cave": {
+    "va": "0x005DECC4",
+    "iso_off": "0x00572544",
+    "elf_off": "0x04DED44",
+    "bytes": 36,
+    "words": [
+     "0x00E2082B",
+     "0x0046182B",
+     "0x00230824",
+     "0x10200003",
+     "0x00000000",
+     "0x08040860",
+     "0x00000000",
+     "0x08040878",
+     "0x00000000"
+    ],
+    "dis": [
+     "0x005DECC4  00E2082B  sltu $at, $a3, $v0      ; v0 > 桶哨兵 a3（严格）",
+     "0x005DECC8  0046182B  sltu $v1, $v0, $a2      ; v0 < 0x1FFFFFFE（a2 在 0x10217C 设的掩码）",
+     "0x005DECCC  00230824  and $at, $at, $v1",
+     "0x005DECD0  10200003  beq $at, $zero, +3 -> 0x005DECE0",
+     "0x005DECD4  00000000  nop",
+     "0x005DECD8  08040860  j 0x00102180            ; 合法：回本桶扫描循环体",
+     "0x005DECDC  00000000  nop",
+     "0x005DECE0  08040878  j 0x001021E0            ; bail：换下一个桶",
+     "0x005DECE4  00000000  nop"
+    ]
+   },
+   "provenance": "GR_COMBFIX/tools/combfix_apply.py 新写（本轮病灶），SPINFIX 里没有这一条"
+  },
+  {
+   "name": "F7b",
+   "why": "分配器 unsorted 桶快路径（0x1021E0 取 fd → 0x102208 解引用）的最小修复：链头落在 EE RAM(32 MB) 之外就 bail 到既有的「unsorted 桶为空」出口，不再拿坏指针对 RAM 内外乱读写。这是 2026-10-18 用户在发射火箭弹 / 按 L1 时真正踩到的那条回边（F4/F7 都覆盖不到它）。",
+   "va": "0x00102208",
+   "iso_off": "0x00095A88",
+   "elf_off": "0x0002288",
+   "old_word": "0xDC430008",
+   "old_dis": "ld $v1,8($v0)",
+   "new_word": "0x0815C2EC",
+   "new_dis": "j 0x00570BB0",
+   "delay_slot": {
+    "va": "0x0010220C",
+    "word": "0x00684824",
+    "changed": false,
+    "note": "and $t1,$v1,$t0 —— 跳转时先带旧 v1 执行一次（无害、随后被覆盖），合法路径经 0x10220C 返回时带正确 v1 再执行一次"
+   },
+   "exits": "合法 j 0x0010220C（回原流程，等同原 ld 之后的落点）/ 不合法 j 0x00102420（= 0x1021F8 那条 beq 的既有落点：unsorted 桶为空时按 binmap 继续找桶；该路径不读 t1/t3，a1 与 a0 原样）",
+   "bound_note": "★ 上界用 0x02000000（EE RAM 顶），不是 F4/F7 的 0x1FFFFFFE：用户这次的坏指针 0x17DD8D36 = 399 MB 正落在 F4/F7 的盲带 [32MB,512MB) 里（本轮 n2 运行 hooklog frame=243 实测 v0=17DD8D36 通过了 0x1FFFFFFE 判定）⇒ 照抄 F4/F7 的上界修不了这次的崩溃。合法 chunk 全在 [heap_base 0x65AEA0, heap_end 0x01F98020) < 32 MB，所以收紧后合法路径逐字节不变（n2 的 162,744 次命中里 v0=0x0071DCD0 / 0x0071E500 等合法值都走了原路）。",
+   "cave": {
+    "va": "0x00570BB0",
+    "iso_off": "0x00504430",
+    "elf_off": "0x0470C30",
+    "bytes": 40,
+    "why_here": "符号位空隙（.symtab 实证）：左侧 gRomName 结束于 0x00570B8F，右侧 @1020 字符串块起于 0x00570C00 ⇒ 0x570B90..0x570C00 共 112 B 对齐填充；取中间 40 B（左余 32 B / 右余 40 B）。8 项检查见 tools/final_fix/cave_verify_f7b.py。",
+    "words": [
+     "0x00C2082B",
+     "0x3C030200",
+     "0x0043182B",
+     "0x00230824",
+     "0x14200003",
+     "0x00000000",
+     "0x08040908",
+     "0x00000000",
+     "0x08040883",
+     "0xDC430008"
+    ],
+    "dis": [
+     "0x00570BB0  00C2082B  sltu $at, $a2, $v0      ; at = (v0 > mstate 0x0055B7A0)，严格",
+     "0x00570BB4  3C030200  lui  $v1, 0x0200       ; v1 = 0x02000000 = EE RAM 顶",
+     "0x00570BB8  0043182B  sltu $v1, $v0, $v1      ; v1 = (v0 < 32 MB)",
+     "0x00570BBC  00230824  and  $at, $at, $v1",
+     "0x00570BC0  14200003  bne  $at, $zero, +3 -> 0x00570BD0   ; 合法",
+     "0x00570BC4  00000000  nop",
+     "0x00570BC8  08040908  j    0x00102420        ; bail：既有 unsorted 桶为空 出口",
+     "0x00570BCC  00000000  nop",
+     "0x00570BD0  08040883  j    0x0010220C        ; 合法：回原流程",
+     "0x00570BD4  DC430008  ld   $v1, 8($v0)       ; 延迟槽 = 被替换掉的那条原指令"
+    ]
+   },
+   "provenance": "2026-10-18 F7B 轮新写（work/builds/GR_F7B/tools/f7b_build.py 的常量与 fix_spec 逐字一致；出盘工具 = apply_fix.py）"
+  },
+  {
+   "name": "G2",
+   "why": "malloc 本桶扫描的切分路径：链上取出的块指针 $v0 必须先落在 EE 主存内。用户原版日志最后一次崩溃前的第一条 store 就在这条路上（pc=0x1024E8 addr=0x17DD8D36 ⇒ $v0=0x17DD8D2E，真正的写是 0x102510 sd $v1,8($v0)）。不合法就跳到 F4 已经在用的「本桶无可用块」出口 0x102590。",
+   "va": "0x001024D0",
+   "iso_off": "0x00095D50",
+   "elf_off": "0x00002550",
+   "old_word": "0xDC4B0008",
+   "old_dis": "ld $t3, 8($v0)",
+   "new_word": "0x0815B944",
+   "new_dis": "j 0x0056E510",
+   "delay_slot": {
+    "va": "0x001024D4",
+    "word": "0x00000000",
+    "changed": false
+   },
+   "exits": "合法 j 0x001024D4（执行原 ld 后继续原循环）/ 不合法 j 0x00102590（F4 同款出口：本桶无可用块）",
+   "cave": {
+    "va": "0x0056E510",
+    "iso_off": "0x00501D90",
+    "elf_off": "0x0046E590",
+    "bytes": 28,
+    "words": [
+     "0x00020E42",
+     "0x10200003",
+     "0x00000000",
+     "0x08040964",
+     "0x00000000",
+     "0x08040935",
+     "0xDC4B0008"
+    ],
+    "dis": [
+     "0x0056E510  00020E42  srl  $at, $v0, 25   ; 取指针高 7 位（32 位视角）",
+     "0x0056E514  10200003  beqz $at, +3        ; 0 ⇒ < 0x02000000 ⇒ 在主存内 ⇒ 合法",
+     "0x0056E518  00000000  nop",
+     "0x0056E51C  08040964  j 0x00102590",
+     "0x0056E520  00000000  nop",
+     "0x0056E524  08040935  j 0x001024D4",
+     "0x0056E528  DC4B0008  ld $t3, 8($v0)   ; 被挪走的原指令（j 的延迟槽）"
+    ]
+   },
+   "provenance": "2026-10-18 PRODCRASH 轮新增（用户原版 PCSX2 日志 L752–L780）"
+  },
+  {
+   "name": "G1b",
+   "why": "free() 入口：被释放的块指针必须 (1) 8 字节对齐 (2) 落在本堆 [heap_lo,heap_hi) (3) 头部自洽（size=head&0x1FFFFFFE ≥ 0x10 且 P+size ≤ heap_hi）。三者全过才走原路，否则本次 free 变 no-op（jr $ra）。heap_lo/heap_hi 由游戏自身的数据字段现场派生：[0x005DF280]=heap_lo=0x0065AEA0、[0x005DF2C0]=heap_size=0x0193D180 ⇒ heap_hi=0x01F98020；15 份即时存档（含英文原盘）三个值全部一致，且 heap_hi == top_chunk + top_size 在 15/15 成立。",
+   "va": "0x00101D10",
+   "iso_off": "0x00095590",
+   "elf_off": "0x00001D90",
+   "old_word": "0xDCAA0008",
+   "old_dis": "ld $t2, 8($a1)",
+   "new_word": "0x0815730C",
+   "new_dis": "j 0x0055CC30",
+   "delay_slot": {
+    "va": "0x00101D14",
+    "word": "0x00000000",
+    "changed": false
+   },
+   "exits": "合法 j 0x00101D14（回原入口后半段，延迟槽执行原 ld $t2,8($a1)）/ 不合法 jr $ra（本次 free 变 no-op）",
+   "cave": {
+    "va": "0x0055CC30",
+    "iso_off": "0x004F04B0",
+    "elf_off": "0x0045CCB0",
+    "bytes": 112,
+    "words": [
+     "0x3C01005E",
+     "0x8C28F280",
+     "0x8C29F2C0",
+     "0x01284821",
+     "0x30AA0007",
+     "0x15400014",
+     "0x00000000",
+     "0x00A8502B",
+     "0x15400011",
+     "0x00000000",
+     "0x00A9502B",
+     "0x1140000E",
+     "0x00000000",
+     "0x8CAB0008",
+     "0x3C0C1FFF",
+     "0x358CFFFE",
+     "0x016C5824",
+     "0x2D6C0010",
+     "0x15800007",
+     "0x00000000",
+     "0x01655821",
+     "0x012B602B",
+     "0x15800003",
+     "0x00000000",
+     "0x08040745",
+     "0xDCAA0008",
+     "0x03E00008",
+     "0x00000000"
+    ],
+    "dis": [],
+    "note": "G1b 判据体（28 字 / 112 B），与 GR_ZH128 的 G1 同址同站点 ⇒ 单变量可比。基础 ELF 在 0x0055CC30 起有 129 B 全零区。"
+   },
+   "provenance": "2026-10-19 GR_G1B 轮：G1 判据过粗（只有上界 <0x02000000）⇒ 换成本堆范围判据；站点/cave 复用 G1 原址。工具 = work\\builds\\GR_G1B\\tools\\g1b_build.py（判据体由 g1b_asm.py 生成）。"
+  },
+  {
+   "name": "F8a",
+   "why": "memset 8 字节循环：让「首次进入」也经过 F8 守卫（原路径跳过 0x403B50）",
+   "va": "0x00403B40",
+   "iso_off": "0x003973C0",
+   "elf_off": "0x00303BC0",
+   "old_word": "0x10000004",
+   "old_dis": "beq $zero,$zero,+4 -> 0x00403B54",
+   "new_word": "0x10000003",
+   "new_dis": "beq $zero,$zero,+3 -> 0x00403B50",
+   "delay_slot": {
+    "va": "0x00403B44",
+    "word": "0x00000000",
+    "changed": false
+   },
+   "exits": "正常 ⇒ 0x00403B50（F8b 站点）",
+   "cave": {
+    "va": "0x004116A8",
+    "iso_off": "0x003A4F28",
+    "elf_off": "0x00311728",
+    "bytes": 24,
+    "words": [
+     "0x00E60821",
+     "0x0027082B",
+     "0x2CF91000",
+     "0x00390825",
+     "0x081082F5",
+     "0x00000000"
+    ],
+    "dis": [
+     "0x004116A8  00E60821  addu $at, $a3, $a2          ; at = 目标 + 剩余长度",
+     "0x004116AC  0027082B  sltu $at, $at, $a3          ; 相加溢出 ⇒ 野长度",
+     "0x004116B0  2CF91000  sltiu $t9, $a3, 0x1000      ; 目标落进 0 页",
+     "0x004116B4  00390825  or $at, $at, $t9            ; at = 任一异常",
+     "0x004116B8  081082F5  j 0x00420BD4                 ; → cave B",
+     "0x004116BC  00000000  nop"
+    ],
+    "why": "ELF 内 24 B 全零岛，紧跟在 0x004116A4 的无条件 j 之后（不可达）；6 份运行期 32 MB 主存快照（用户 01/02 号位 + 本机 4 次运行期转储）逐字节仍为 0"
+   }
+  },
+  {
+   "name": "F8b",
+   "why": "memset 8 字节循环：目标指针落进 0 页（<0x1000）就不再进入循环，直接走 memset 自带返回序列",
+   "va": "0x00403B50",
+   "iso_off": "0x003973D0",
+   "elf_off": "0x00303BD0",
+   "old_word": "0x2CC20008",
+   "old_dis": "sltiu $v0,$a2,8",
+   "new_word": "0x081045AA",
+   "new_dis": "j 0x004116A8",
+   "delay_slot": {
+    "va": "0x00403B54",
+    "word": "0x00000000",
+    "changed": false
+   },
+   "exits": "正常 ⇒ cave A ⇒ cave B ⇒ j 0x00403B5C（原循环 beql）；目标 <0x1000 或 目标+长度 32 位溢出 ⇒ 剩余长度清零 ⇒ 当轮退出，零 store",
+   "cave": {
+    "va": "0x00420BD4",
+    "iso_off": "0x003B4454",
+    "elf_off": "0x00320C54",
+    "bytes": 16,
+    "words": [
+     "0x0001300B",
+     "0x2CC20008",
+     "0x08100ED7",
+     "0x00000000"
+    ],
+    "dis": [
+     "0x00420BD4  0001300B  movn $a2, $zero, $at        ; 异常 ⇒ 剩余长度清零",
+     "0x00420BD8  2CC20008  sltiu $v0, $a2, 8           ; 清零后重算出口判据",
+     "0x00420BDC  08100ED7  j 0x00403B5C                 ; → 回原循环 beql",
+     "0x00420BE0  00000000  nop"
+    ],
+    "why": "ELF 内 24 B 全零岛（0x00420BEC 是既有 error-path 自旋，本岛在其之前的填充区，仅 0x420BD4..0x420BE0 四字被写）；6 份运行期 32 MB 主存快照里逐字节仍为 0"
+   }
+  }
+ ],
+ "gates_readback": [
+  {
+   "va": "0x00416EE8",
+   "word": "0x2CA900BA"
+  },
+  {
+   "va": "0x00417160",
+   "word": "0x2D0900BA"
+  },
+  {
+   "va": "0x0041751C",
+   "word": "0x2D4B00BA"
+  },
+  {
+   "va": "0x005656A4",
+   "word": "0x2D6C00BA"
+  }
+ ],
+ "must_stay_identical_regions": [
+  {
+   "why": "DBCS cave 全区",
+   "va_lo": "0x00416E00",
+   "va_hi": "0x00417800"
+  },
+  {
+   "why": "ZH cave block B",
+   "va_lo": "0x00565600",
+   "va_hi": "0x00565B00"
+  },
+  {
+   "why": "SPINFIX CAVE_F1 区（本轮未使用）",
+   "va_lo": "0x0055B730",
+   "va_hi": "0x0055B780"
+  },
+  {
+   "why": "解压器本体",
+   "va_lo": "0x00539110",
+   "va_hi": "0x00539310"
+  },
+  {
+   "why": "解压器调用者",
+   "va_lo": "0x0051BE10",
+   "va_hi": "0x0051C000"
+  },
+  {
+   "why": "RSFont 被替换区",
+   "va_lo": "0x0021AC00",
+   "va_hi": "0x0021AE00"
+  },
+  {
+   "why": "分配器镜像",
+   "va_lo": "0x00101C00",
+   "va_hi": "0x00102700",
+   "note": "G2 站点落在本区内 ⇒ 本区不再是「逐字节相同」，而是「除 1 个声明站点字外逐字节相同」（apply_fix.py region_same 语义）。**G1 不在本盘上**（free() 入口 0x101D10 保持原字）。"
+  },
+  {
+   "why": "ELF 头 0x1000 B",
+   "va_lo": "0x0006C780",
+   "va_hi": "0x0006D780"
+  },
+  {
+   "why": "F8 站点邻域（memset 8 字节循环）",
+   "va_lo": "0x00403B00",
+   "va_hi": "0x00403C00"
+  },
+  {
+   "why": "F8 cave A 邻域",
+   "va_lo": "0x00411680",
+   "va_hi": "0x004116E0"
+  },
+  {
+   "why": "F8 cave B 邻域",
+   "va_lo": "0x00420BA0",
+   "va_hi": "0x00420C00"
+  }
+ ],
+ "acceptance_index": [
+  {
+   "what": "成品身份 / 差异窗口 / ELF 指纹（成品 == 候选盘；vs 基底 78 B 全在声明窗口内，窗口外 0 B）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §A · work/builds/GR_RELEASE/temp/rel_identity.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "三闸门 + 槽 0..2349 + 保留槽 473 + 借槽 5 + ASCII 182 条（同几何基底逐 texel）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §B · temp/rel_atlas_base.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "dump_font 家族：full 2350/2350（473 保留槽空）/ live 0..1871 全有墨 0 错",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §C · temp/rel_font_dump.txt",
+   "verdict": "通过"
+  },
+  {
+   "what": "文本层：载荷级裸旧码 0 / 载荷逐字节与基底相同 0 差异 / 全量解码未解析字节 0（SF 5 处 0xA4 为上游既有）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §D · temp/rel_text.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "实机 6000 帧冷启动：191 截图 / TLB Miss 0 / Trap 0 / 未识别指令 0 / 暂停 0",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §E · work/builds/GR_RELEASE/runs/smoke_GR_ZH2400_FINAL/",
+   "verdict": "通过"
+  },
+  {
+   "what": "与基底逐帧对照：191/191 帧 sha256 相同（0 差异）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §E · temp/frames_vs_base.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "补丁存活回读（第 5970 帧 RAM 里 3 站点 + 3 cave 共 29 字逐字相符）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §E · GR_SPINFIX/tools/spinfix_ramcheck.py",
+   "verdict": "通过"
+  },
+  {
+   "what": "同现场回归 S1（桶 126 坏链头）：未修盘 70,266 Trap / 46 帧即死 vs 本盘 300 帧跑完 Trap 0（F4/OOMFIX 命中）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §F · states/S1_FINAL.p2s",
+   "verdict": "通过"
+  },
+  {
+   "what": "同现场回归 S1b（桶 121 毒化 + 低端清零）：未修纯读死循环 vs 本盘 60 帧跑完、F7 bail 命中 3 次",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §F · states/S1b_low0_FINAL.p2s",
+   "verdict": "通过"
+  },
+  {
+   "what": "用户实机会话旁证（COMBFIX_2400 跑到 33,330 帧：Trap 0 / 未识别 0 / TLB 0）",
+   "where": "work/builds/GR_RELEASE/temp/userlog_LIVE_2400/emulog_snapshot.txt",
+   "verdict": "旁证"
+  },
+  {
+   "what": "【F7B 轮】成品身份：基底 + 四件套 ⇒ sha256 7d4e3297…936d（与候选盘 F7B_prod / F7B_prod_full 逐字节相同）；vs 基底 108 B / 34 run 全在声明窗口内",
+   "where": "docs/REPORT_F7B.md §B · work/builds/GR_F7B/F7B_prod_full.meta.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】cave 选址 8 项静态检查（ELF 全零 / 10 份运行时快照逐字节未变 / 无指针字 / 无 lui+addiu 构造 / 无跳转目标 / 无符号覆盖 / 邻居净空 32 B 与 40 B）",
+   "where": "docs/REPORT_F7B.md §B · tools/final_fix/cave_verify_f7b.py",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】新指令逐条反汇编回读（站点 j 0x570BB0 + cave 10 字全部与表一致）",
+   "where": "docs/REPORT_F7B.md §B · work/builds/GR_F7B/F7B_prod_full.meta.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】108 字节差异外的全部字节与基底相同（apply_fix.py 的 7 个参照区 + 4 闸门 + ELF 头断言）",
+   "where": "docs/REPORT_F7B.md §B · apply_fix.py 出盘自证",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】6000 帧冷启动：F7B_prod_full / F7B_only 各自 191 截图 / TLB 0 / Trap 0 / 未识别 0 / 暂停 0",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/runs/smoke_*",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】与 GR_ZH126 逐帧对照：191/191 帧 sha256 相同（两盘均 0 差异）",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/out/frames_*.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】补丁存活回读（第 5970 帧 RAM）：GR_ZH126 128/128 B、F7B_prod_full 168/168 B、F7B_only 40/40 B 逐字节与盘上映像相同",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/out/ramcheck_*.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】★ 新现场（unsorted 链头毒化 = 用户崩溃同址）：基底未修 = TLB 29 + 卡在 0x80000180 异常向量、0 截图；GR_ZH126（无 F7b）= 同上死；F7B_prod_full = TLB 0、cave 命中 162,744 次、11 截图、跑满 600 帧",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/runs/{u1,n1,n2}_unsorted_*",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】历史 S1b 等价现场（桶 121 毒化）：基底未修 = 0x102180/0x1021A0/0x1021D0 纯三块自旋 + 0 截图；GR_ZH126 与 F7B_prod_full = 自旋被截断（F7 bail）读数完全相同 ⇒ 无回归",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/runs/{u3,r2,r4}_*",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】从英文原盘的端到端逐字节复现：英文原盘 ⊕ K2 转储 ⇒ 基底 d7f83d7e…443ca0 ⇒ 四件套 ⇒ 7d4e3297…936d == 新成品",
+   "where": "docs/REPORT_F7B.md §B · tools/final_fix/repro_from_eng.ps1",
+   "verdict": "通过"
+  },
+  {
+   "what": "【GR_ZH129 轮】成品身份：基底(四件套+去 G1 的 G2) ⇒ sha256 da8994d5… / ELF CRC F778E283；与内容源 GR_ZH128_cand3.iso 逐字节相同；vs 基底 129 B / 41 run 全在声明窗口内，窗口外 0 B",
+   "where": "work\\builds\\GR_RELEASE\\GR_ZH129.meta.json · tools\\final_fix\\apply_fix.py --verify-only",
+   "verdict": "通过"
+  },
+  {
+   "what": "【GR_ZH129 轮】从英文原盘端到端逐字节复现：ENG ISO ⊕ K2 转储 ⇒ 基底 d7f83d7e… ⇒ 四件套+G2 ⇒ 与 GR_ZH129.iso 逐字节相同",
+   "where": "docs\\REPORT_G1_EQUIV.md §10 · tools\\final_fix\\repro_from_eng_no_g1.ps1",
+   "verdict": "通过"
+  },
+  {
+   "what": "【GR_ZH129 轮】1 帧粒度对照（5738 帧/盘 × 2 跑）：GR_ZH129 vs GR_ZH127 = 0 帧（G2 惰性）；GR_ZH129 vs GR_ZH126 = 3 帧（= 已交付的 F7b）；GR_ZH129 vs GR_ZH128 = 4 帧（= 被去掉的 G1）",
+   "where": "docs\\REPORT_G1_EQUIV.md §9/§10 · work\\builds\\GR_PRODCRASH\\runs_g1eq2\\",
+   "verdict": "通过"
+  },
+  {
+   "what": "【GR_ZH129 轮】6000 帧冷启动冒烟：2 跑各 5738 截图 / TLB Miss 0 / Trap 0 / 未识别指令 0 / 暂停 0",
+   "where": "work\\builds\\GR_PRODCRASH\\runs_g1eq2\\G1EQ2_LOG.txt",
+   "verdict": "通过"
+  },
+  {
+   "what": "成品身份 / 差异窗口 / ELF 指纹（成品 == 候选盘；vs 基底 78 B 全在声明窗口内，窗口外 0 B）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §A · work/builds/GR_RELEASE/temp/rel_identity.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "三闸门 + 槽 0..2349 + 保留槽 473 + 借槽 5 + ASCII 182 条（同几何基底逐 texel）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §B · temp/rel_atlas_base.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "dump_font 家族：full 2350/2350（473 保留槽空）/ live 0..1871 全有墨 0 错",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §C · temp/rel_font_dump.txt",
+   "verdict": "通过"
+  },
+  {
+   "what": "文本层：载荷级裸旧码 0 / 载荷逐字节与基底相同 0 差异 / 全量解码未解析字节 0（SF 5 处 0xA4 为上游既有）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §D · temp/rel_text.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "实机 6000 帧冷启动：191 截图 / TLB Miss 0 / Trap 0 / 未识别指令 0 / 暂停 0",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §E · work/builds/GR_RELEASE/runs/smoke_GR_ZH2400_FINAL/",
+   "verdict": "通过"
+  },
+  {
+   "what": "与基底逐帧对照：191/191 帧 sha256 相同（0 差异）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §E · temp/frames_vs_base.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "补丁存活回读（第 5970 帧 RAM 里 3 站点 + 3 cave 共 29 字逐字相符）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §E · GR_SPINFIX/tools/spinfix_ramcheck.py",
+   "verdict": "通过"
+  },
+  {
+   "what": "同现场回归 S1（桶 126 坏链头）：未修盘 70,266 Trap / 46 帧即死 vs 本盘 300 帧跑完 Trap 0（F4/OOMFIX 命中）",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §F · states/S1_FINAL.p2s",
+   "verdict": "通过"
+  },
+  {
+   "what": "同现场回归 S1b（桶 121 毒化 + 低端清零）：未修纯读死循环 vs 本盘 60 帧跑完、F7 bail 命中 3 次",
+   "where": "docs/REPORT_RELEASE_VERIFY.md §F · states/S1b_low0_FINAL.p2s",
+   "verdict": "通过"
+  },
+  {
+   "what": "用户实机会话旁证（COMBFIX_2400 跑到 33,330 帧：Trap 0 / 未识别 0 / TLB 0）",
+   "where": "work/builds/GR_RELEASE/temp/userlog_LIVE_2400/emulog_snapshot.txt",
+   "verdict": "旁证"
+  },
+  {
+   "what": "【F7B 轮】成品身份：基底 + 四件套 ⇒ sha256 7d4e3297…936d（与候选盘 F7B_prod / F7B_prod_full 逐字节相同）；vs 基底 108 B / 34 run 全在声明窗口内",
+   "where": "docs/REPORT_F7B.md §B · work/builds/GR_F7B/F7B_prod_full.meta.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】cave 选址 8 项静态检查（ELF 全零 / 10 份运行时快照逐字节未变 / 无指针字 / 无 lui+addiu 构造 / 无跳转目标 / 无符号覆盖 / 邻居净空 32 B 与 40 B）",
+   "where": "docs/REPORT_F7B.md §B · tools/final_fix/cave_verify_f7b.py",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】新指令逐条反汇编回读（站点 j 0x570BB0 + cave 10 字全部与表一致）",
+   "where": "docs/REPORT_F7B.md §B · work/builds/GR_F7B/F7B_prod_full.meta.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】108 字节差异外的全部字节与基底相同（apply_fix.py 的 7 个参照区 + 4 闸门 + ELF 头断言）",
+   "where": "docs/REPORT_F7B.md §B · apply_fix.py 出盘自证",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】6000 帧冷启动：F7B_prod_full / F7B_only 各自 191 截图 / TLB 0 / Trap 0 / 未识别 0 / 暂停 0",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/runs/smoke_*",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】与 GR_ZH126 逐帧对照：191/191 帧 sha256 相同（两盘均 0 差异）",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/out/frames_*.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】补丁存活回读（第 5970 帧 RAM）：GR_ZH126 128/128 B、F7B_prod_full 168/168 B、F7B_only 40/40 B 逐字节与盘上映像相同",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/out/ramcheck_*.json",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】★ 新现场（unsorted 链头毒化 = 用户崩溃同址）：基底未修 = TLB 29 + 卡在 0x80000180 异常向量、0 截图；GR_ZH126（无 F7b）= 同上死；F7B_prod_full = TLB 0、cave 命中 162,744 次、11 截图、跑满 600 帧",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/runs/{u1,n1,n2}_unsorted_*",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】历史 S1b 等价现场（桶 121 毒化）：基底未修 = 0x102180/0x1021A0/0x1021D0 纯三块自旋 + 0 截图；GR_ZH126 与 F7B_prod_full = 自旋被截断（F7 bail）读数完全相同 ⇒ 无回归",
+   "where": "docs/REPORT_F7B.md §C · work/builds/GR_F7B/runs/{u3,r2,r4}_*",
+   "verdict": "通过"
+  },
+  {
+   "what": "【F7B 轮】从英文原盘的端到端逐字节复现：英文原盘 ⊕ K2 转储 ⇒ 基底 d7f83d7e…443ca0 ⇒ 四件套 ⇒ 7d4e3297…936d == 新成品",
+   "where": "docs/REPORT_F7B.md §B · tools/final_fix/repro_from_eng.ps1",
+   "verdict": "通过"
+  },
+  {
+   "what": "【GR_ZH129 轮】成品身份：基底(四件套+去 G1 的 G2) ⇒ sha256 da8994d5… / ELF CRC F778E283；与内容源 GR_ZH128_cand3.iso 逐字节相同；vs 基底 129 B / 41 run 全在声明窗口内，窗口外 0 B",
+   "where": "work\\builds\\GR_RELEASE\\GR_ZH129.meta.json · tools\\final_fix\\apply_fix.py --verify-only",
+   "verdict": "通过"
+  },
+  {
+   "what": "【GR_ZH129 轮】从英文原盘端到端逐字节复现：ENG ISO ⊕ K2 转储 ⇒ 基底 d7f83d7e… ⇒ 四件套+G2 ⇒ 与 GR_ZH129.iso 逐字节相同",
+   "where": "docs\\REPORT_G1_EQUIV.md §10 · tools\\final_fix\\repro_from_eng_no_g1.ps1",
+   "verdict": "通过"
+  },
+  {
+   "what": "【GR_ZH129 轮】1 帧粒度对照（5738 帧/盘 × 2 跑）：GR_ZH129 vs GR_ZH127 = 0 帧（G2 惰性）；GR_ZH129 vs GR_ZH126 = 3 帧（= 已交付的 F7b）；GR_ZH129 vs GR_ZH128 = 4 帧（= 被去掉的 G1）",
+   "where": "docs\\REPORT_G1_EQUIV.md §9/§10 · work\\builds\\GR_PRODCRASH\\runs_g1eq2\\",
+   "verdict": "通过"
+  },
+  {
+   "what": "【GR_ZH129 轮】6000 帧冷启动冒烟：2 跑各 5738 截图 / TLB Miss 0 / Trap 0 / 未识别指令 0 / 暂停 0",
+   "where": "work\\builds\\GR_PRODCRASH\\runs_g1eq2\\G1EQ2_LOG.txt",
+   "verdict": "通过"
+  }
+ ],
+ "known_residuals": [
+  "【2026-10-18 1 帧粒度判定轮 · 本盘最大残余】free() 入口 0x101D10 **未守卫**（G1 不在本盘上）⇒ 用户 2026-10-18 日志里那条最上游的坏指针（t=217 s，pc=0x101D10 addr=0x17DD8D3E，$a1=0x17DD8D36）**仍会照原样进 free()**，把它写进空闲链；后续 F4/F7/F7b/G2 只能拦住「链上跑飞」的后果，不能拦住「坏指针入库」这个起点 ⇒ **崩溃链起点仍敞开，实机仍可能崩**。两条路线的取舍见 docs/REPORT_G1_EQUIV.md §10。",
+  "【同一轮】F7b 的 3 帧 1 帧粒度差异（f2034 / f2082+f2154，同一屏切换时刻差 1 帧，非内容损坏）随四件套一起在本盘上；它当时以 30 帧口径 191/191 通过 ⇒ 「被口径蒙过」，是否可接受尚未裁决（docs/CORRECTIONS.md §7.1 待办 ①）。",
+  "F4 上界取 0x1FFFFFFE（512 MB）：坏值落在 [32 MB, 512 MB) 时会通过校验（用户这次的 0x17DD8D36 = 399 MB 就是这样穿过 F4 的）—— 见文末【F7B 轮新登记 1】的收紧配方",
+  "F7 上界取 0x1FFFFFFE（512 MB）：同上；F7 只护住 own-bin 回边，unsorted 回边已由 F7b 覆盖",
+  "「汉化是否抬高触发率」未判定：没有做同场景「汉化 vs 英文」的定量对照；本轮只是把已发生的堆损坏从致命改成可恢复",
+  "ES / FR 语言表：抬闸门后仍带旧单字节码 (28+29)×2 处，主机语言 = ES/FR 时界面会吞字；DE/IT 结构异常（约 74+76 处）明确未动。主机语言 = 中文/英文时不渲染这些表，无影响",
+  "保留槽 1872..2344 共 473 个无字形：按设计，文本不引用（成品盘上引用 >1735 的只有 2345..2349 五个借槽）⇒ 不会出现空白方块",
+  "SF XML 里 5 处「配不出对的前导 0xA4」：上游既有缺陷（docs/REPORT_SENTINEL_FIX.md §4/§8.1 已登记），本轮原样保留",
+  "本轮不在盘上的参照盘（已被清理删除，非本工程决定）：GR_ZH124.iso、GR_F364.iso、GR_FA2400_K2*.iso、GR_REBUILD2400_allpat.iso、GR_SPINFIX_F4.iso；受影响的验收已用等价/更强的方式替代（docs/REPORT_RELEASE_VERIFY.md §B/§D）",
+  "【2026-10-18 F7B 轮已划掉】分配器 unsorted 桶回边（0x102200 一带）：现已由 F7b 加固（站点 0x102208 / cave 0x570BB0），实测未修必死、加 F7b 活到 600 帧且 cave 命中 162,744 次、TLB 0。证据 docs/REPORT_F7B.md §A/§C",
+  "【F7B 轮新登记 1】F4/F7 的上界仍是 0x1FFFFFFE（512 MB），坏值落在 [32 MB, 512 MB) 时会**通过**校验：用户这次的 0x17DD8D36（399 MB）就是这样穿过 F4 与 F7 的（本轮实测：n2 的 hooklog frame=243 v0=17DD8D36 通过 0x1FFFFFFE 判定）。F7b 已改用 0x02000000 上界；**F4/F7 尚未收紧**。收紧配方（各 2 条字，未施工）：F4 侧把 0x1024B8/0x1024BC 的 lui 0x1FFF + ori 0xFFFE 改成 lui 0x0200 + ori 0x0000（t5 只在该循环当上界用，需逐条核）；F7 侧同理改 0x102178/0x10217C（a2）。属下一轮收口项",
+  "【F7B 轮新登记 2】free() 一族回边（0x101D10 / 0x101DE4 / 0x101E08 / 0x101E34 / 0x101E6C）在 2400 产品线上**没有任何校验**：用户 2026-10-18 的日志里 t=217 s / 229 s 就有这 5 个 PC 的 TLB Miss（addr=0x17dd8d3e/0x17dd8d46/0x14/0x10）——它们比 unsorted 那次（t=264 s）更早，是坏指针的**上游来源**。SPINFIX 的 F1/F1b 覆盖其中两条，但当年实测带来 6 帧像素差异故未纳入产品线。是否收口 = 下一轮的独立课题",
+  "【F7B 轮新登记 3】F7b 只做「链头指针范围」校验（与 F4/F7 同型），不做「尺寸合法性」校验：若坏指针恰好落在 [0x55B7A0, 0x02000000) 的**已映射**区内（例如指向 ELF 映像 0x00100000 一带），仍会被当成 chunk 解引用 ⇒ 本补丁不覆盖这一类。判据：合法=原路走 / 非法=安全退出，与 F4/F7 语义一致",
+  "F8 只拦两种 memset 野目标：① 目标指针 < 0x1000（0 页，本现场 a3=1）；② 目标 + 长度 32 位溢出（本现场第二阶段 a3=0x00403B48 / a2=0xFFBFCABF）。目标落在 [0x1000, 0x02000000) 内的野指针仍会走 TLB 异常路径（可见、非静默）。",
+  "F8 在 memset 后端热路径上每 8 字节多 4 条 ALU + 2 次块间跳转（原为 0 条）；6000 帧冷启动 1 帧粒度对照 GR_ZH129/基底均为 0 帧差异（见报告 §C.4）。",
+  "F8 **不能**救回已经野写毁掉的现场：用户 2 号位存档里 0x00100000..0x003FFFFF 已被清零、0x00403B48/0x00403B4C（循环步进）已是 0 ⇒ 该存档只能演示「死循环被打断」，不可能恢复到结算画面；真正的验收必须在正常流程里走到结算（报告 §D）。",
+  "本表 = ELF 层; 文本层 (481 处陈旧码表乱码) 由 patch_zh133_stale_hashr.py 修, 顺序: 130 字形右缘 → 133 陈旧码表追平。",
+  "G1 (coarse) 未入表: 与 G1b 互斥, 见 product_tag_note。"
+ ],
+ "archived_away_disks": [
+  {
+   "path": "work/builds/GR_COMBFIX/COMBFIX_A.iso",
+   "sha256": "e12f2770d041f5ac02079c37fcb7137a49310538adb79dba026224cbb4edccc2",
+   "why": "单变量变体（基底 SPINFIX_F4 + OOMFIX），已被 flavor 2400 取代；meta.json 与 runs/ 证据保留",
+   "deleted": "2026-10-18 归档清理"
+  },
+  {
+   "path": "work/builds/GR_COMBFIX/COMBFIX_B.iso",
+   "sha256": "3959498be967447b0404745885a0fc7f616c85d97dfa7833979b563531c16b41",
+   "why": "单变量变体（+F1/F1b，实测带来 660..810 帧 6 帧像素差异，未被采纳）；meta.json 与 runs/ 证据保留",
+   "deleted": "2026-10-18 归档清理"
+  },
+  {
+   "path": "work/builds/GR_LAYOUT/LAY_fix1_bytecount.iso",
+   "sha256": "a69a9ca44049eaed4085239a2b8d10af58888f54f62a51e40c1ece22dd2d2808",
+   "bytes": 1648164864,
+   "elf_sha256": "0a986bb375176df41fad67798423f2e1a0a1c902d181ab9d673627a6d98387b9",
+   "game_crc": "7A761FCA",
+   "why": "「同现场回归」的**未修对照盘**（46 帧 70,266 Trap 的来源）。**2026-10-18 已按指示删除** ⇒ 旧文档里「特意保留」的表述作废（见 README §4.4）。结论/日志/截图/存档仍在: runs/reg_p1_FINAL_S1、runs/reg_p2_FINAL_S1b、GR_LAYOUT/results_fix1_bytecount.txt、GR_SPINFIX/runs/smoke_LAY_fix1_bytecount",
+   "deleted": "2026-10-18 按收尾指示删除"
+  },
+  {
+   "path": "work/builds/GR_F7B/diag/d_unsorted_prod.iso",
+   "sha256": "9289f83d8e4c68da5889a7e9d48dbf2086bba6ad6d616515c4b9d2b2c60fafaa",
+   "why": "F7B 轮的**未修对照盘**（产品线 3 件套 + 4 B 毒化 unsorted 链头）；跑完即删（4 张盘额度），读数与 emulog 留在 runs/n1_unsorted_prod/",
+   "deleted": "2026-10-18 F7B 轮跑完删除"
+  },
+  {
+   "path": "work/builds/GR_F7B/diag/d_unsorted_f7b.iso",
+   "sha256": "f174384f85a1c6b44b2b562be9dbb3e4ab47ad62a5cccbbee0c25687ea5d33f7",
+   "why": "同上 + F7b（= F7B_prod_full + 4 B 毒化）；读数留在 runs/n2_unsorted_f7b/",
+   "deleted": "2026-10-18 F7B 轮跑完删除"
+  },
+  {
+   "path": "work/builds/GR_F7B/diag/d_b126_prod.iso",
+   "sha256": "1e7e627a142d8e22b326a6bae416c3730e2f282a540565f9d239d3cd43009ef5",
+   "why": "历史 S1（桶 126）的等价现场；读数留在 runs/r1_b126_prod/",
+   "deleted": "2026-10-18 F7B 轮跑完删除"
+  },
+  {
+   "path": "work/builds/GR_F7B/diag/d_b121_prod.iso",
+   "sha256": "e660a2dc27d699445858390a9fc624722dfe012847794143a924bd36f21e679b",
+   "why": "历史 S1b（桶 121）的等价现场；读数留在 runs/r2_b121_prod/",
+   "deleted": "2026-10-18 F7B 轮跑完删除"
+  }
+ ],
+ "retained_disks": [
+  {
+   "path": "work/builds/GR_RELEASE/GR_ZH127.iso",
+   "why": "★ 当前交付成品（四件套；与 work/builds/GR_F7B/F7B_prod_full.iso / F7B_prod.iso 逐字节相同）"
+  },
+  {
+   "path": "work/builds/GR_RELEASE/GR_ZH126.iso",
+   "why": "上一版成品（三件套）—— 保留作实机对照：它正是 2026-10-18 仍会崩的那一张"
+  },
+  {
+   "path": "work/builds/GR_F7B/F7B_prod_full.iso",
+   "why": "F7B 轮的候选盘（基底 = GR_REBUILD2400 + 四件套；推荐交付口径）"
+  },
+  {
+   "path": "work/builds/GR_F7B/F7B_prod.iso",
+   "why": "F7B 轮的交叉验证盘（基底 = GR_ZH126 + F7b）—— 与 F7B_prod_full 逐字节相同 ⇒ 两条独立构筑路线互相印证"
+  },
+  {
+   "path": "work/builds/GR_F7B/F7B_only.iso",
+   "why": "单变量诊断盘（基底 + 仅 F7b），用于证明 F7b 单独在场时的行为"
+  },
+  {
+   "path": "work/builds/GR_F7B/base/GR_REBUILD2400.iso",
+   "why": "本轮现场重建的基底（sha256 d7f83d7e…443ca0，与声明值一致；work\\builds\\GR_REBUILD\\ 本轮已被清理，故此处保留一份以免再重建）"
+  }
+ ],
+ "merged_from": [
+  "fix_spec_no_g1.json",
+  "fix_spec_g1b_g1b_strict.json",
+  "fix_spec_debrief_b.json"
+ ],
+ "merged_patches": [
+  "F4",
+  "OOMFIX",
+  "F7",
+  "F7b",
+  "G2",
+  "G1b",
+  "F8a",
+  "F8b"
+ ]
+}

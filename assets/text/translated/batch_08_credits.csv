@@ -1,0 +1,300 @@
+﻿resource,id,text_zh
+LANG,G062.I000,<title>《幽灵行动：丛林风暴》游戏制作人员名单
+LANG,G062.I003,<title>项目团队
+LANG,G062.I005,<title>项目管理
+LANG,G062.I007,Vincent Greco
+LANG,G062.I008,<title>副制作人
+LANG,G062.I009,Sophie Pendariès
+LANG,G062.I011,Nary-Tiana Andriamampandry
+LANG,G062.I013,<title>美术团队
+LANG,G062.I014,<title>首席美术师
+LANG,G062.I015,Fabrice Holbé
+LANG,G062.I016,<title>3D 美术师
+LANG,G062.I017,Christophe Dur
+LANG,G062.I018,Florence Charpentier
+LANG,G062.I019,Laurent Debarge
+LANG,G062.I020,Lina Lu
+LANG,G062.I021,Michel Vibert
+LANG,G062.I022,Pierre Truong
+LANG,G062.I023,<title>协作人员
+LANG,G062.I024,Christophe Neverre
+LANG,G062.I025,Frédéric Ressaire
+LANG,G062.I027,<title>程序团队
+LANG,G062.I029,Dominique Dumont
+LANG,G062.I031,Alain Robin
+LANG,G062.I032,Franck Delattre
+LANG,G062.I033,Frédéric Décréau
+LANG,G062.I034,Han Da Qing
+LANG,G062.I035,Igor Cesi
+LANG,G062.I036,Marie-Claire Ordoquy
+LANG,G062.I037,Olivier Amiaud
+LANG,G062.I038,Olivier Didelot
+LANG,G062.I039,Philippe Touillaud
+LANG,G062.I040,Pierrick Crepy
+LANG,G062.I041,<title>协作人员
+LANG,G062.I042,Marc Villemain
+LANG,G062.I043,Kamal Essoufi
+LANG,G062.I045,<title>设计
+LANG,G062.I047,Olivier Palmieri
+LANG,G062.I048,<title>关卡设计师
+LANG,G062.I049,Cyril Gouel
+LANG,G062.I050,Frédérick Gaveau
+LANG,G062.I051,Jean-Baptiste Duval
+LANG,G062.I052,Olivier Barbier
+LANG,G062.I054,<title>首席玩法程序员
+LANG,G062.I055,Jean-Vincent Segard
+LANG,G062.I056,<title>玩法程序员
+LANG,G062.I057,Frédéric Lefebvre
+LANG,G062.I058,Nicolas Chereau
+LANG,G062.I059,Pascal Henry
+LANG,G062.I061,<title>剧情
+LANG,G062.I062,<title>编剧
+LANG,G062.I064,David Neiss
+LANG,G062.I066,<title>音效
+LANG,G062.I067,<title>首席音效设计师
+LANG,G062.I068,Ida Yebra
+LANG,G062.I070,<title>录音
+LANG,G062.I071,<title>Soundelux
+LANG,G062.I073,音乐创作、编曲及演奏：Bill Brown
+LANG,G062.I076,<title>资产管理员
+LANG,G062.I077,Sara Huddleston
+LANG,G062.I078,<title>录音工程师
+LANG,G062.I079,Jerry Merrill
+LANG,G062.I085,Elliot Woods
+LANG,G062.I090,<title>附加配音演员指导
+LANG,G062.I091,Elizabeth Loverso
+LANG,G062.I093,<title>在线测试
+LANG,G062.I094,Dave LoSapio
+LANG,G062.I100,Jon Schweitzer
+LANG,G062.I101,Scott Shirhall
+LANG,G062.I103,Jeff McGann
+LANG,G062.I104,Clarence Simpson
+LANG,G062.I105,<title>特别鸣谢：
+LANG,G062.I106,《幽灵行动：Island Thunder》团队
+LANG,G062.I107,并特别感谢 Heather Maxwell
+LANG,G062.I108,Todd Lewis
+LANG,G062.I109,David Weinstein 
+LANG,G062.I114,Christian Allen
+LANG,G062.I117,<title>过场动画
+LANG,G062.I119,<title>《丛林风暴》片头动画
+LANG,G062.I120,<title>制作
+LANG,G062.I121,Ubi Sound Studio，法国
+LANG,G062.I122,<title>音效与视频制作人
+LANG,G062.I123,Karen Vernimmen
+LANG,G062.I124,<title>片头过场导演
+LANG,G062.I125,Dominique Carrara
+LANG,G062.I127,Xavier Le Dantec
+LANG,G062.I128,<title>剪辑
+LANG,G062.I129,Antoine Vareille
+LANG,G062.I130,Julien Milaire
+LANG,G062.I131,<title>音效艺术总监
+LANG,G062.I132,Manu Bachet
+LANG,G062.I133,<title>音效制作
+LANG,G062.I134,Fred Devanlay
+LANG,G062.I136,<title>撤离过场影片
+LANG,G062.I137,<title>导演兼分镜
+LANG,G062.I138,Mathieu Breda
+LANG,G062.I139,<title>技术与艺术总监
+LANG,G062.I140,Charles Beirnaert
+LANG,G062.I142,<title>所有影片
+LANG,G062.I143,<title>动画工作室经理
+LANG,G062.I144,Sophie Penziki
+LANG,G062.I145,<title>3D 建模师（渲染与特效）
+LANG,G062.I146,Corinne Bouvier
+LANG,G062.I147,Jérôme Lionard
+LANG,G062.I148,Xavier Le Dantec
+LANG,G062.I149,Guillaume Marcel
+LANG,G062.I150,Olivier Bonenfant
+LANG,G062.I152,Michel Guillemain
+LANG,G062.I153,Philippe Penaud
+LANG,G062.I154,Faouzi Zidane
+LANG,G062.I155,Isabelle Leduc
+LANG,G062.I156,Gilles Aveneau
+LANG,G062.I157,Jean Millou
+LANG,G062.I158,<title>鸣谢：
+LANG,G062.I159,Hugo Frossard
+LANG,G062.I162,<title>质量保证
+LANG,G062.I164,<title>加拿大
+LANG,G062.I165,<title>质检工作室经理
+LANG,G062.I166,Eric Tremblay
+LANG,G062.I168,Benoît Gagnon
+LANG,G062.I170,Arnaud Dion Cloutier
+LANG,G062.I171,Sébastien Le Bouthillier
+LANG,G062.I172,Bruno Quiroz
+LANG,G062.I173,Jimmy Gilbert
+LANG,G062.I174,Julien Kerdevez
+LANG,G062.I175,Guillaume Beaulieu
+LANG,G062.I176,Michel Coulombe
+LANG,G062.I177,François Roy
+LANG,G062.I178,Mathieu Girard
+LANG,G062.I179,Daniel Puglielli
+LANG,G062.I180,Jacques-Patrick Audain
+LANG,G062.I181,Pedro Albuquerque
+LANG,G062.I182,Leslie Thomas Chartier
+LANG,G062.I183,Mandala Nzamba
+LANG,G062.I184,Alexandre Grierson
+LANG,G062.I185,Martin Asnong
+LANG,G062.I186,Thiéry Adam
+LANG,G062.I187,Guillaume Cassel
+LANG,G062.I188,Mathieu Landry
+LANG,G062.I189,Alejandro Philippe Nunez
+LANG,G062.I190,Patrick Vaillancourt
+LANG,G062.I191,Patrick Sauvageau
+LANG,G062.I192,Luc Gagnon
+LANG,G062.I193,<title>质检平台专员
+LANG,G062.I194,Éric Visconti
+LANG,G062.I195,Michel Morin
+LANG,G062.I196,Jean-François Dupuis
+LANG,G062.I198,<title>法国
+LANG,G062.I200,Frédéric Lapalus
+LANG,G062.I201,Sébastien Arnoult
+LANG,G062.I203,Carl Huyghues Despointes
+LANG,G062.I204,Raffi Messant
+LANG,G062.I205,François Soliman
+LANG,G062.I206,Hervé Da Mota
+LANG,G062.I207,Omar Bouali
+LANG,G062.I208,Cédric Dubois
+LANG,G062.I209,Sunil Bebin
+LANG,G062.I212,<title>育碧蒙特勒伊工作室
+LANG,G062.I214,<title>工作室总监
+LANG,G062.I215,Nicolas Gaume
+LANG,G062.I216,<title>管理团队
+LANG,G062.I217,Caroline Rasamoely（人力资源）
+LANG,G062.I218,Cécile Bourget（人力资源）
+LANG,G062.I219,Sylvie Blum（成本控制）
+LANG,G062.I220,Sandrine Maigret（美术）
+LANG,G062.I221,David Douillard（设计）
+LANG,G062.I222,Victor Douangamath（质检）
+LANG,G062.I223,Martin Carrier（公关）
+LANG,G062.I226,<title>发行：育碧娱乐
+LANG,G062.I228,<title>总裁兼首席执行官
+LANG,G062.I229,Yves Guillemot
+LANG,G062.I231,<title>国际制作
+LANG,G062.I234,<title>国际内容总监
+LANG,G062.I236,<title>编辑内容经理
+LANG,G062.I238,<title>编辑协调
+LANG,G062.I239,Nicolas Schoener
+LANG,G062.I240,Sebastien Doré
+LANG,G062.I241,Julien Galou
+LANG,G062.I242,<title>试玩测试
+LANG,G062.I243,Frédéric Duroc
+LANG,G062.I244,Lionel Raynaud
+LANG,G062.I245,<title>中央编剧部
+LANG,G062.I247,协助：Olivier Henriot
+LANG,G062.I248,<title>制作流程
+LANG,G062.I249,Michel Pierfitte
+LANG,G062.I250,协助：Magali Chrétien
+LANG,G062.I251,<title>审批协调员
+LANG,G062.I252,Romain Vazeille
+LANG,G062.I253,Dave Costello
+LANG,G062.I256,<title>美国市场副总裁
+LANG,G062.I257,Tony Kee
+LANG,G062.I258,<title>美国集团品牌经理
+LANG,G062.I259,Helene Juguet
+LANG,G062.I261,Michael Jeffress
+LANG,G062.I263,<title>EMEA 市场
+LANG,G062.I264,<title>EMEA 市场总监
+LANG,G062.I265,Florence Alibert
+LANG,G062.I267,Caroline Stevens
+LANG,G062.I268,<title>EMEA 品牌经理
+LANG,G062.I271,<title>特别鸣谢：
+LANG,G062.I272,Thomas Couvret
+LANG,G062.I273,Benoît Fouillet
+LANG,G062.I276,<title>本地化
+LANG,G062.I278,<title>本地化管理
+LANG,G062.I279,<title>本地化部门总监
+LANG,G062.I281,<title>项目经理
+LANG,G062.I283,<title>协助
+LANG,G062.I284,Benedicte Laborie
+LANG,G062.I286,<title>法语版
+LANG,G062.I287,<title>翻译
+LANG,G062.I288,Xavier Vibert
+LANG,G062.I289,Olivier Henriot
+LANG,G062.I290,<title>配音导演
+LANG,G062.I291,Brigitte Guedj
+LANG,G062.I293,Sylvain Lemarié
+LANG,G062.I294,Michel Vigné
+LANG,G062.I295,Bruno Choel
+LANG,G062.I296,<title>后期制作
+LANG,G062.I297,Christine Webster
+LANG,G062.I298,<title>质检
+LANG,G062.I299,Bug Tracker
+LANG,G062.I301,<title>德语版
+LANG,G062.I302,<title>翻译与质检
+LANG,G062.I303,Stefan Dinger
+LANG,G062.I304,Dieter Pfeil
+LANG,G062.I305,<title>录音工作室
+LANG,G062.I306,Tonprod. Krauthausen，科隆
+LANG,G062.I308,Vittorio Alfieri
+LANG,G062.I309,Fabian Körner
+LANG,G062.I310,Jörg Löw
+LANG,G062.I311,Dieter Maise
+LANG,G062.I312,Ilya Welter
+LANG,G062.I313,Volker Wolf
+LANG,G062.I314,<title>音响工程师
+LANG,G062.I315,Dieter Krauthausen
+LANG,G062.I316,Frank Schlusemann
+LANG,G062.I318,<title>意大利语版
+LANG,G062.I319,<title>翻译
+LANG,G062.I320,Synthesis International
+LANG,G062.I321,<title>录音工作室
+LANG,G062.I322,Synthesis International
+LANG,G062.I323,<title>质检
+LANG,G062.I324,Synthesis International
+LANG,G062.I326,<title>西班牙语版
+LANG,G062.I327,<title>翻译与质检
+LANG,G062.I328,BETAFIX SERVICES
+LANG,G062.I329,<title>录音工作室
+LANG,G062.I330,Estudios ABAIRA
+LANG,G062.I331,LUNA AUDIO
+LANG,G062.I332,<title>配音导演
+LANG,G062.I333,Rafael Gómez
+LANG,G062.I335,Héctor Cantolla
+LANG,G062.I336,Enrique Santarén
+LANG,G062.I339,<title>育碧在线
+LANG,G062.I341,<title>在线游戏副制作人
+LANG,G062.I342,Eric Lagel
+LANG,G062.I343,<title>游戏服务制作人
+LANG,G062.I344,Dominic Laroche
+LANG,G062.I345,<title>游戏服务开发员
+LANG,G062.I346,Philippe Lalande
+LANG,G062.I347,Scott Schmeisser
+LANG,G062.I348,Guillaume Plante
+LANG,G062.I351,<title>特别鸣谢
+LANG,G062.I353,Nicolas Métro
+LANG,G062.I354,Gaëlle Prunayre
+LANG,G062.I356,Domitille Doat
+LANG,G062.I357,Stéphane Faureau
+LANG,G062.I359,Rio dos Camaraos
+LANG,G062.I360,Caroline Cantin
+LANG,G062.I361,Yannis Mallat
+LANG,G062.I362,Benoît Galarneau
+LANG,G062.I363,Delphine Delesalle
+LANG,G062.I365,José Alves-Martins
+LANG,G062.I366,Roberto Carlos
+LANG,G062.I367,Emmanuelle Decour
+LANG,G062.I368,Alkis Argyriadis
+LANG,G062.I369,Arnaud de Pischoff
+LANG,G062.I370,Fabrice Machecler
+LANG,G062.I372,Hugues Vanderschelden
+LANG,G062.I373,Joëlle Caroline
+LANG,G062.I374,Lu Jia Qui
+LANG,G062.I376,Liu Jun
+LANG,G062.I377,Davinder Jalaf
+LANG,G062.I378,Mark Pittam
+LANG,G062.I379,Deniz Ahmet
+LANG,G062.I380,Andy Macoy
+LANG,G062.I381,Michael Werle
+LANG,G062.I382,Mark LeBreton
+LANG,G062.I383,Lionel Lemarié
+LANG,G062.I384,Guillaume Luzé
+LANG,G062.I385,Dominique Duvivier
+LANG,G062.I386,Jean-Marc Geffroy
+LANG,G062.I387,Julien Barès
+LANG,G062.I388,Maud Coiffet
+LANG,G062.I390,以及《幽灵行动》上海团队全体成员
+ATR,ATR:MP_PLT2_ASL.ATR:ActorName,古巴步枪手
+ATR,ATR:MP_PLT2_DEM.ATR:ActorName,古巴爆破兵
+ATR,ATR:MP_PLT2_HVYWEP.ATR:ActorName,古巴支援兵
+ATR,ATR:MP_PLT2_SNIP.ATR:ActorName,古巴狙击手
+STRINGS_TXT,TXT:ITM_BOMB,爆破装药

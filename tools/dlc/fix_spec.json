@@ -1,0 +1,32 @@
+{
+ "schema": "grjs-build/1",
+ "inputs": {
+  "iso": {
+   "path": "third_party\\orig\\ps2\\[PS2] Tom Clancy's Ghost Recon - Jungle Storm (U).iso",
+   "sha256": "292f5a6a050e82e05efb5bf9fd5ce3bc12706a8ae57c78b729348a5c80fd0767",
+   "bytes": 1229225984
+  }
+ },
+ "stages": {
+  "font": {
+   "out": "work\\builds\\spec7_font.iso",
+   "bytes": 1229285376,
+   "sha256": "c4445a8df162e548f851625ad1ae465839cbf4242e200f9ff4767d07d6ddb82e"
+  },
+  "elf": {
+   "out": "work\\builds\\spec7_elf.iso",
+   "bytes": 1229285376,
+   "sha256": "29d83cdd4948c7e39d2dd22cf4d52c25847ed35f200a2bb87387ca252f095e73"
+  },
+  "text": {
+   "out": "work\\builds\\spec7_text.iso",
+   "bytes": 1229264896,
+   "sha256": "e569e68793ffaf85bf65609db14b56e46ce650743f4a85f5f55d0c3e88e10934"
+  },
+  "all": {
+   "out": "work\\builds\\v81.iso",
+   "bytes": 1229266944,
+   "sha256": "29883b66b8e1d3f2cbedf283deeb956484260b041d918aba3ec37495611b4d24"
+  }
+ }
+}

@@ -1,0 +1,401 @@
+{
+  "schema": "gr-ps2-zh-chain/1",
+  "_comment": [
+    "GR PS2 汉化 · 正式版构筑链的单一真源 (single source of truth)。",
+    "tools/final_fix/build.py 只按本文件执行；tools/final_fix/verify.py 只按本文件断言。",
+    "要改汉化 = 改这里的某一阶段 + 对应 assets；不要去改 build.py 的流程。",
+    "ELF 补丁的逐字节真相在 elf_patches.json（apply_fix.py 的输入）。"
+  ],
+  "product": {
+    "name": "GR_ZH146",
+    "file": "GR_ZH146.iso",
+    "bytes": 1648164864,
+    "sha256": "4ded92e2fee535ac00893af60faee630323af124aa38a89d1777d1721d04617a",
+    "md5": "8732e73f04e0af18060b0e990ec94a6c",
+    "elf": {
+      "lba": 295,
+      "bytes": 37453732,
+      "sha256": "a0c8499cf30f1cc5c44dfb49502270ed0ecbdccb30c023246b227591c40ba12e",
+      "crc32_xor": "653FBF69",
+      "savestate_name": "SLUS-20613 (653FBF69).01.p2s"
+    },
+    "contains": {
+      "mission_names_zh": 40,
+      "mission_names_en": 0,
+      "m15_title": "M15 - 白刃",
+      "charset_pairs": 2300,
+      "glyphs_painted": 1954
+    }
+  },
+  "inputs": {
+    "eng_iso": {
+      "path": "third_party/orig/ps2/Tom Clancy's Ghost Recon (USA).iso",
+      "sha256": "2b42ea7ce9bd0a85972a07ca59b1b9d79422ed318b85737db3cfd17daa788531",
+      "bytes": 1648164864,
+      "local_only": true
+    },
+    "k2_dump": {
+      "path": "%LOCALAPPDATA%/PCSX2/cdvd-dump/GR_FA2400_K2 (2026-10-17 15-08-20).dump",
+      "sha256": "11f371f294e4f8e353c21931a9c38d73c1309832a21e74cfb3e31d7095daadd9",
+      "local_only": true
+    },
+    "font_ttf": {
+      "path": "third_party/fonts/方正像素16.ttf",
+      "local_only": true,
+      "note": "只用于把字表渲染进字库格子；字体本身有版权，不进版本库"
+    }
+  },
+  "seeds": [
+    {
+      "id": "charset_work",
+      "from": "tools/final_fix/assets/charset/charset_compiled_zh16.json.before_zh139",
+      "sha256": "28a1dd47cbd35669cbd7c3bdb3e5bd091062b1f6580b4bb62c1b67addf451c59"
+    }
+  ],
+  "stages": [
+    {
+      "id": "base",
+      "title": "英文原盘 ⊕ K2 cdvd 转储 ⇒ 2400 产品线基底",
+      "tool": "rebuild_base.py",
+      "args": [
+        "--orig",
+        "@eng_iso",
+        "--k2-dump",
+        "@k2_dump",
+        "--out",
+        "@out"
+      ],
+      "expect_sha256": "d7f83d7ec4a8fe1ec8d60de4b17b94513bd1540dc929d3b667086f4910443ca0",
+      "in": []
+    },
+    {
+      "id": "elf",
+      "title": "卡死修复四件套 (F4 / F7 / F7b / OOMFIX) 打进 ELF",
+      "tool": "apply_fix.py",
+      "args": [
+        "--spec",
+        "@repo/tools/final_fix/elf_patches.json",
+        "--base",
+        "@in",
+        "--out",
+        "@out",
+        "--force"
+      ],
+      "expect_sha256": "e65e77fbb696ec5dd9dfaf5b6ca5bbc62d26bfa00e1f5c238fa150c4868791a1",
+      "in": [
+        "base"
+      ]
+    },
+    {
+      "id": "glyph_edge",
+      "title": "字库右缘采样修正 (zh130)",
+      "tool": "patch_zh130_glyph_edge.py",
+      "args": [
+        "--iso",
+        "@in",
+        "--out",
+        "@out",
+        "--report",
+        "@outdir/report_glyph_edge.json",
+        "--charset",
+        "@repo/tools/final_fix/assets/charset/charset_compiled_zh16.json.before_zh130",
+        "--charset-out",
+        "@outdir/charset_edge_tmp.json",
+        "--refs-cache",
+        "@outdir/refs_payload.json",
+        "--exclude-container",
+        "GR.IMG#171 M03_RRBRIDGE_SKY.BMZ",
+        "--exclude-container",
+        "GR.IMG#2466 MAN_OLD02.BMZ"
+      ],
+      "expect_sha256": "db3f8b997a9dfaa89e5147cbeb75341d71d271cedbd53a2dd1c8aa1bee8aeefb",
+      "in": [
+        "elf"
+      ]
+    },
+    {
+      "id": "stale",
+      "title": "旧码残留追赶 (zh133)",
+      "tool": "patch_zh133_stale_hashr.py",
+      "args": [
+        "--iso",
+        "@in",
+        "--out",
+        "@out",
+        "--report",
+        "@outdir/report_stale.json"
+      ],
+      "expect_sha256": "3fb12c8d16c2448e5c8976896b8132d65b3f6c8cf0e679f709aaf2b2572cdf95",
+      "in": [
+        "glyph_edge"
+      ]
+    },
+    {
+      "id": "text2",
+      "title": "文本层修正 #2 (zh134)",
+      "tool": "patch_zh134_textfix2.py",
+      "args": [
+        "--iso",
+        "@in",
+        "--out",
+        "@out",
+        "--report",
+        "@outdir/report_text2.json"
+      ],
+      "expect_sha256": "165b7eb2c667fc0c373b193f054ecd525d04124e5c57f9e69f6e69e4043ecd6a",
+      "in": [
+        "stale"
+      ]
+    },
+    {
+      "id": "profile",
+      "title": "著 = 0xFF 被 XML 词法器当 EOF ⇒ 改写 13 条专家档案 (zh136)",
+      "tool": "patch_profile2_text.py",
+      "args": [
+        "--iso",
+        "@in",
+        "--out",
+        "@out",
+        "--report",
+        "@outdir/report_profile.json"
+      ],
+      "expect_sha256": "172b35cc940431e99a128ed1ff5d5f80941362a2bf1a281d2a0d8b09ee408140",
+      "in": [
+        "text2"
+      ]
+    },
+    {
+      "id": "gate_ff",
+      "title": "FF 闸门：文本区出现 0xFF 即 FAIL",
+      "kind": "gate_ff",
+      "expect_sha256": "172b35cc940431e99a128ed1ff5d5f80941362a2bf1a281d2a0d8b09ee408140",
+      "in": [
+        "profile"
+      ]
+    },
+    {
+      "id": "glyphs61",
+      "title": "61 个「有码无字」补画到自己的格子 (zh138)",
+      "tool": "patch_zh138_glyphs61.py",
+      "args": [
+        "--iso",
+        "@in",
+        "--out",
+        "@out",
+        "--report",
+        "@outdir/report_glyphs61.json"
+      ],
+      "expect_sha256": "7396f55cd8d4d7ea5dd7806a355a25c8413c59a2bf1296547722e54bd541a2f2",
+      "in": [
+        "profile"
+      ]
+    },
+    {
+      "id": "chars139",
+      "title": "13 个实证生字 ⇒ 13 个零引用 PUA 槽",
+      "tool": "patch_zh139_chars.py",
+      "args": [
+        "--base",
+        "@in",
+        "--out",
+        "@out",
+        "--plan",
+        "@repo/tools/final_fix/assets/charset/charset_expand_zh139.json",
+        "--charset",
+        "@charset_work",
+        "--report",
+        "@outdir/report_chars139.json"
+      ],
+      "expect_sha256": "33b9acd9341f6e8f382e87545c4f75a0399eb4ba12f3bb02d4b58d3acb06bae5",
+      "in": [
+        "glyphs61"
+      ]
+    },
+    {
+      "id": "chars140",
+      "title": "9 个富文本生字 ⇒ 9 个 PUA 槽",
+      "tool": "patch_zh140_chars.py",
+      "args": [
+        "--base",
+        "@in",
+        "--out",
+        "@out",
+        "--plan",
+        "@repo/tools/final_fix/assets/charset/charset_expand_zh140.json",
+        "--charset",
+        "@charset_work",
+        "--report",
+        "@outdir/report_chars140.json"
+      ],
+      "expect_sha256": "9ecd07af73965f1690827cbe5236e3547d9872d4e3f386f82a7c79eb3d362231",
+      "in": [
+        "chars139"
+      ]
+    },
+    {
+      "id": "enrich",
+      "title": "富文本表注入 (43 条 SFXML 长条目)",
+      "tool": "inject_text_csv.py",
+      "args": [
+        "--csv",
+        "@repo/tools/final_fix/assets/text/enrich/GR_ZH140_text_long.csv",
+        "--src",
+        "@in",
+        "--dst",
+        "@out",
+        "--report",
+        "@outdir/report_inject_enrich.json"
+      ],
+      "expect_sha256": "83757ff1d1bf87abd3c2c3059e25a2384c5a0497edb8fe0cbba44622b7fe247d",
+      "in": [
+        "chars140"
+      ]
+    },
+    {
+      "id": "chars141",
+      "title": "3 个真字形 … × 惧 ⇒ 3 个 PUA 槽 2033..2035",
+      "tool": "patch_zh141_chars.py",
+      "args": [
+        "--base",
+        "@in",
+        "--out",
+        "@out",
+        "--plan",
+        "@repo/tools/final_fix/assets/charset/charset_expand_zh141.json",
+        "--charset",
+        "@charset_work",
+        "--report",
+        "@outdir/report_chars141.json"
+      ],
+      "expect_sha256": "a4238ef2ad457fac213979f969f1521e198f3a16dbe70b44a76f938d818becef",
+      "in": [
+        "enrich"
+      ]
+    },
+    {
+      "id": "merge_text",
+      "title": "合并文本层：39 正文 / 93 空行 / 57 特别收录标题 / 26 LANG 行",
+      "tool": "inject_text_csv.py",
+      "args": [
+        "--csv",
+        "@repo/tools/final_fix/assets/text/merge",
+        "--src",
+        "@in",
+        "--dst",
+        "@out",
+        "--report",
+        "@outdir/report_inject_merge.json"
+      ],
+      "expect_sha256": "23b3f95187b8fa68d540c6dc358ad06bc922da9e71a9b2d6361f2b2240ac9357",
+      "in": [
+        "chars141"
+      ]
+    },
+    {
+      "id": "ike142",
+      "title": "NTSC_IKE.RES：TEXT w 270 → 286，面板 290 → 306",
+      "tool": "patch_zh142_ike.py",
+      "args": [
+        "--src",
+        "@in",
+        "--dst",
+        "@out",
+        "--report",
+        "@outdir/report_ike142.json"
+      ],
+      "expect_sha256": "28e4bc915774c9605eaa6071252cea1009bb6d3214a0273f7de950d176c4cd64",
+      "in": [
+        "merge_text"
+      ]
+    },
+    {
+      "id": "ike143",
+      "title": "NTSC_IKE.RES：TEXT w 286 → 294（面板不动）",
+      "tool": "patch_zh143_ike.py",
+      "args": [
+        "--src",
+        "@in",
+        "--dst",
+        "@out",
+        "--w",
+        "294",
+        "--report",
+        "@outdir/report_ike143.json"
+      ],
+      "expect_sha256": "52145319c15de639d392788bb0be56deeea7dc952f254c966fad1ceb5eed4d42",
+      "keep": true,
+      "in": [
+        "ike142"
+      ]
+    },
+    {
+      "id": "misnames40",
+      "title": "40/40 个 *.MIS 的 <Name> 汉化（可变长度 + 零填充 + LZO 令牌重指）",
+      "tool": "patch_misnames40.py",
+      "args": [
+        "--all",
+        "--force",
+        "--base",
+        "@in",
+        "--out",
+        "@out",
+        "--report-dir",
+        "@outdir"
+      ],
+      "in": [
+        "ike143"
+      ],
+      "expect_sha256": "4ded92e2fee535ac00893af60faee630323af124aa38a89d1777d1721d04617a"
+    }
+  ],
+  "gates": [
+    {
+      "id": "size",
+      "kind": "size",
+      "bytes": 1648164864
+    },
+    {
+      "id": "sha256",
+      "kind": "sha256",
+      "expect": "4ded92e2fee535ac00893af60faee630323af124aa38a89d1777d1721d04617a"
+    },
+    {
+      "id": "md5",
+      "kind": "md5",
+      "expect": "8732e73f04e0af18060b0e990ec94a6c"
+    },
+    {
+      "id": "elf_crc",
+      "kind": "elf_crc",
+      "expect": "653FBF69"
+    },
+    {
+      "id": "elf_sha",
+      "kind": "elf_sha",
+      "expect": "a0c8499cf30f1cc5c44dfb49502270ed0ecbdccb30c023246b227591c40ba12e"
+    },
+    {
+      "id": "ff_gate",
+      "kind": "gate_ff"
+    },
+    {
+      "id": "mis_names",
+      "kind": "mis_names",
+      "zh_expected": 40,
+      "en_expected": 0,
+      "m15_title": "M15 - 白刃"
+    },
+    {
+      "id": "charset",
+      "kind": "charset",
+      "pairs": 2300,
+      "codes": 103,
+      "painted_min": 1900,
+      "empty_pua_max": 400
+    },
+    {
+      "id": "iso_header",
+      "kind": "iso_header"
+    }
+  ]
+}
